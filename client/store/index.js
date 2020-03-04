@@ -6,21 +6,21 @@ import axios from "axios";
 import history from "../utils/history";
 import { stockPull, stockPullTest } from "../utils/utilities";
 
-// INITIAL STATE
+// -------------- INITIAL STATE --------------
 const initialState = {
   user: {},
-  stocks: [],
+  stocks: {},
   portfolio: []
 };
 
-// ACTION TYPES
+// -------------- ACTION TYPES --------------
 const GET_USER = "GET_USER";
 const REMOVE_USER = "REMOVE_USER";
 const SET_PORTFOLIO = "SET_PORTFOLIO";
 const STOCK_TRANSACT = "STOCK_TRANSACT";
 const SET_STOCK = "SET_STOCK";
 
-// ACTION CREATORS
+// -------------- ACTION CREATORS --------------
 export const getUser = user => ({ type: GET_USER, user });
 export const removeUser = () => ({ type: REMOVE_USER });
 export const setPortfolio = portfolio => ({ type: SET_PORTFOLIO, portfolio });
@@ -31,7 +31,7 @@ export const addPortfolio = (portfolio, user) => ({
   user
 });
 
-// THUNKS
+// -------------- THUNKS --------------
 export const me = () => async dispatch => {
   try {
     const res = await axios.get("/auth/me");
@@ -62,7 +62,7 @@ export const logout = () => async dispatch => {
   try {
     await axios.post("/auth/logout");
     dispatch(removeUser());
-    history.push("/SignIn");
+    history.push("/");
   } catch (error) {
     console.error("Redux Error -", error);
   }
@@ -88,21 +88,21 @@ export const transactStock = stockObj => async dispatch => {
 
 export const getLiveStock = portfolio => async dispatch => {
   try {
-    const stockArr = [];
+    const stockFullObj = {};
 
     Object.keys(portfolio).forEach(stock => {
       // const stockObj = stockPull(stock); // REAL ONE!
       const stockObj = stockPullTest(stock); // TESTING!
-      stockArr.push(stockObj);
+      stockFullObj[stock] = stockObj;
     });
 
-    dispatch(setStock(stockArr));
+    dispatch(setStock(stockFullObj));
   } catch (error) {
     console.error("Redux Error -", error);
   }
 };
 
-// REDUCER
+// -------------- REDUCER --------------
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_USER:
@@ -127,7 +127,7 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-// STORE CREATION
+// -------------- STORE CREATION --------------
 const middleware = composeWithDevTools(
   // applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
   applyMiddleware(thunkMiddleware)

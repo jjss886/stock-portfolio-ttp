@@ -28,7 +28,6 @@ export const stockPullTest = ticker => {
   try {
     // PULL STOCK PRICE INFORMATION
     const stockData = {
-      ticker,
       name: "Testing Ticker",
       latestPrice: Math.floor(Math.random() * 30) + 5,
       openingPrice: Math.floor(Math.random() * 30) + 5

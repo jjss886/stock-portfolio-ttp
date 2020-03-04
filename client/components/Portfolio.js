@@ -33,19 +33,25 @@ class Portfolio extends Component {
   };
 
   postList = port => {
-    const hash = this.hashStock(port);
+    const hash = this.hashStock(port),
+      { stocks } = this.props;
     let totalVal = 0;
 
-    console.log("moo -", this.props.stocks);
+    if (Object.keys(stocks).length) {
+      Object.keys(hash).forEach(key => {
+        // ADDING IN STOCK VALUE AND OPENING!
+        if (!(key in stocks)) {
+          stocks[key] = {};
+          stocks[key].latestPrice = 0;
+          stocks[key].openingPrice = 0;
+        }
+        hash[key].curPrice = stocks[key].latestPrice;
+        hash[key].openPrice = stocks[key].openingPrice;
 
-    Object.keys(hash).forEach(key => {
-      // !! NEED TO ADD IN STOCK VALUE AND OPENING!
-      hash[key].curPrice = Math.floor(Math.random() * 30) + 5;
-      hash[key].openPrice = Math.floor(Math.random() * 30) + 5;
-
-      // ACCUMULATING TOTAL PORTFOLIO VALUE
-      totalVal += hash[key].curPrice * hash[key].quantity;
-    });
+        // ACCUMULATING TOTAL PORTFOLIO VALUE
+        totalVal += hash[key].curPrice * hash[key].quantity;
+      });
+    }
 
     return [
       totalVal,
