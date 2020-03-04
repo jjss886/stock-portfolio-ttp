@@ -197,6 +197,13 @@ h4 {
 
 /* -------------------- PORTFOLIO -------------------- */
 .portFullDiv {
+  display: flex;
+  justify-content: space-evenly;
+  width: 60vw;
+}
+/* -------------------- STOCK -------------------- */
+.stockFullDiv {
+  margin-bottom: 15px;
 }
 
 /* -------------------- TRANSCTION -------------------- */
@@ -206,4 +213,24 @@ h4 {
 /* -------------------- SINGLE TRANSCTION -------------------- */
 .singleTransactFullDiv {
   margin-bottom: 15px;
+}
+
+/* -------------------- BUY FORM -------------------- */
+.buyFormFullDiv {
+  display: flex;
+  flex-direction: column;
+}
+
+.buyForm {
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.buyBtn {
+  height: 30px;
+  width: 100px;
+  font-size: 18px;
+  border-radius: 5px;
 }

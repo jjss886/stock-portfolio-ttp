@@ -12,10 +12,17 @@ class Portfolio extends Component {
   }
 
   render() {
+    const { portfolio } = this.props;
     return (
       <div className="portFullDiv">
-        Portfolio
-        <Stock />
+        {portfolio.length ? (
+          <div className="allStockDiv">
+            {portfolio.map((stock, idx) => (
+              <Stock key={idx} stock={stock} />
+            ))}
+          </div>
+        ) : null}
+
         <BuyForm />
       </div>
     );

@@ -15,12 +15,14 @@ const initialState = {
 // ACTION TYPES
 const GET_USER = "GET_USER";
 const REMOVE_USER = "REMOVE_USER";
+const SET_STOCK = "SET_STOCK";
 const SET_PORTFOLIO = "SET_PORTFOLIO";
 
 // ACTION CREATORS
 export const getUser = user => ({ type: GET_USER, user });
 export const removeUser = () => ({ type: REMOVE_USER });
 export const setPortfolio = portfolio => ({ type: SET_PORTFOLIO, portfolio });
+export const setStock = () => ({ type: SET_STOCK });
 
 // THUNKS
 export const me = () => async dispatch => {
