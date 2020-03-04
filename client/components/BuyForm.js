@@ -35,7 +35,7 @@ class BuyForm extends Component {
     if (res) {
       // const { companyName, lastestPrice } = res,
       const companyName = "apple",
-        lastestPrice = 290,
+        lastestPrice = 120,
         totalCost = lastestPrice * quantity;
       if (totalCost > user.cash) return alert("Not Enough Cash");
       transactStock({
@@ -43,7 +43,7 @@ class BuyForm extends Component {
         ticker,
         name: companyName,
         quantity,
-        cost: lastestPrice,
+        value: lastestPrice,
         action: "buy",
         date: dateCreate()
       });

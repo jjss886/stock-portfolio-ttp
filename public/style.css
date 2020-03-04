@@ -223,6 +223,8 @@ h4 {
 
 /* -------------------- STOCK -------------------- */
 .stockFullDiv {
+  display: flex;
+  flex-direction: column;
   margin-bottom: 15px;
 }
 

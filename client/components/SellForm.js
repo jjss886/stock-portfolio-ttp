@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { hashStock, dateCreate } from "../utils/utilities";
 import { transactStock } from "../store";
 
 class SellForm extends Component {
   constructor() {
     super();
     this.state = {
-      ticker: "",
+      ticker: "--",
       quantity: ""
     };
   }
@@ -44,7 +45,7 @@ class SellForm extends Component {
         ticker,
         name: companyName,
         quantity,
-        cost: lastestPrice,
+        value: lastestPrice,
         action: "sell",
         date: dateCreate()
       });
@@ -68,10 +69,11 @@ class SellForm extends Component {
             value={this.state.ticker}
             onChange={this.handleTickerChange}
           >
+            <option className="sellTickerOption">--</option>
             {portfolio.length
-              ? portfolio.map((stock, idx) => (
+              ? Object.keys(hashStock(portfolio)).map((ticker, idx) => (
                   <option key={idx} className="sellTickerOption">
-                    {stock.ticker}
+                    {ticker}
                   </option>
                 ))
               : null}
@@ -104,6 +106,7 @@ class SellForm extends Component {
 
 const mapState = state => {
   return {
+    user: state.user,
     portfolio: state.portfolio
   };
 };

@@ -12,8 +12,12 @@ const Stock = ({ stock }) => {
       </h4>
 
       <span>
-        Quantity: {quantity} Value: ${curPrice} Total Value: $
+        Quantity: {quantity} Total Value: $
         {totalVal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+      </span>
+
+      <span>
+        Value: ${curPrice} Open: ${openPrice}
       </span>
     </div>
   );

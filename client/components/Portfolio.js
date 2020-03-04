@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { hashStock } from "../utils/utilities";
 import { getPortfolio, getLiveStock } from "../store";
 
 import Stock from "./Stock";
@@ -16,24 +17,12 @@ class Portfolio extends Component {
     const { getPortfolio, user, portfolio, getLiveStock } = this.props;
     if (user.id && user.id !== prevProps.user.id) getPortfolio(user.id);
     if (portfolio.length && portfolio.length !== prevProps.portfolio.length) {
-      getLiveStock(this.hashStock(portfolio));
+      getLiveStock(hashStock(portfolio.slice()));
     }
   }
 
-  hashStock = port => {
-    return port.reduce((acm, val) => {
-      const { ticker, quantity, action } = val;
-      if (ticker in acm) {
-        if (action === "buy") acm[ticker].quantity += quantity;
-        else acm[ticker].quantity -= quantity;
-      } else acm[ticker] = val;
-
-      return acm;
-    }, {});
-  };
-
   postList = port => {
-    const hash = this.hashStock(port),
+    const hash = hashStock(port),
       { stocks } = this.props;
     let totalVal = 0;
 
@@ -63,7 +52,7 @@ class Portfolio extends Component {
 
   render() {
     const { portfolio, user } = this.props,
-      [totalVal, adjPortfolio] = this.postList(portfolio);
+      [totalVal, adjPortfolio] = this.postList(portfolio.slice());
 
     return (
       <div className="portFullDiv">

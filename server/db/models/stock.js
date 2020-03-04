@@ -11,7 +11,7 @@ const Stock = db.define("stock", {
   quantity: {
     type: Sequelize.INTEGER
   },
-  cost: {
+  value: {
     type: Sequelize.FLOAT
   },
   action: {

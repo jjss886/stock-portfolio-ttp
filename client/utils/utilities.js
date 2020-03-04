@@ -28,14 +28,29 @@ export const stockPullTest = ticker => {
   try {
     // PULL STOCK PRICE INFORMATION
     const stockData = {
+      ticker,
       name: "Testing Ticker",
       latestPrice: Math.floor(Math.random() * 30) + 5,
       openingPrice: Math.floor(Math.random() * 30) + 5
     };
+    console.log("TEST API HIT ! -", stockData);
     return stockData;
   } catch (error) {
     // SEND BACK ERROR
     console.error("Stock Error -", error);
     return false;
   }
+};
+
+// CONSOLIDATING PORTFOLIO TO JUST SHOW UNIQUE AND AGGREGATE QUANTITY
+export const hashStock = port => {
+  return port.reduce((acm, val) => {
+    const { ticker, quantity, action } = val;
+    if (ticker in acm) {
+      if (action === "buy") acm[ticker].quantity += quantity;
+      else acm[ticker].quantity -= quantity;
+    } else acm[ticker] = Object.assign({}, val);
+
+    return acm;
+  }, {});
 };
