@@ -1,25 +1,13 @@
-import { createStore, applyMiddleware } from "redux";
+import { createStore, combineReducers, applyMiddleware } from "redux";
 import { createLogger } from "redux-logger";
 import thunkMiddleware from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
-import axios from "axios";
 
-// INITIAL STATE
-const initialState = {};
-
-// ACTION TYPE
-
-// ACTION CREATORS
-
-// THUNKY THUNKS
+import user from "./user";
+import stock from "./stock";
 
 // REDUCERS
-const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    default:
-      return state;
-  }
-};
+const reducer = combineReducers({ user, stock });
 
 // STORE CREATION
 const middleware = composeWithDevTools(
@@ -30,3 +18,5 @@ const middleware = composeWithDevTools(
 const store = createStore(reducer, middleware);
 
 export default store;
+export * from "./user";
+export * from "./stock";

@@ -1,3 +1,83 @@
 /* -------------------- GLOBAL ELEMENTS -------------------- */
+body {
+  margin: 0;
+  font-family: sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h2 {
+  margin: 0;
+}
+
+h3 {
+  margin: 0;
+}
+
+/* -------------------- NAV BAR -------------------- */
+.navBarFullDiv {
+  position: fixed;
+  z-index: 2;
+  width: 100vw;
+  height: 65px;
+  background-color: rgba(234, 234, 234, 1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: black;
+}
+
+.navBarLeft {
+  width: 40%;
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+}
+
+.navBarRight {
+  display: flex;
+  justify-content: space-around;
+  padding: 0 15px;
+}
+
+.navBarHeader {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.navBarLink {
+  font-size: 20px;
+  font-weight: bold;
+  padding: 0 10px;
+  margin: 0 5px;
+}
+
+.selectedNavLink {
+  border-color: rgba(0, 152, 195, 0.8);
+  border-style: dashed;
+  border-width: 1px;
+}
 
 /* -------------------- MAIN APP -------------------- */
+.appFullDiv {
+  background-color: rgba(209, 209, 183, 1);
+  display: flex;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.appInsideDiv {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  min-height: 100vh;
+  margin-top: 0%;
+  margin-bottom: 0em;
+  padding-top: 90px;
+  padding-bottom: 0%;
+}
+
+/* -------------------- SIGN IN PAGE -------------------- */
+.signInFullDiv {
+}
