@@ -17,8 +17,6 @@ class Portfolio extends Component {
     if (user.id && user.id !== prevProps.user.id) getPortfolio(user.id);
   }
 
-  portValue = arr => arr.reduce((acm, val) => acm + val.quantity * val.cost, 0);
-
   postList = port => {
     const hash = port.reduce((acm, val) => {
       const { ticker, quantity } = val;
@@ -26,13 +24,23 @@ class Portfolio extends Component {
       return acm;
     }, {});
 
-    // NEED TO ADD IN STOCK VALUE!
+    let totalVal = 0;
 
-    return Object.values(hash);
+    Object.keys(hash).forEach(key => {
+      // NEED TO ADD IN STOCK VALUE AND OPENING!
+      hash[key].curPrice = Math.floor(Math.random() * 30) + 5;
+      hash[key].openPrice = Math.floor(Math.random() * 30) + 5;
+
+      // ACCUMULATING TOTAL PORTFOLIO VALUE
+      totalVal += hash[key].curPrice * hash[key].quantity;
+    });
+
+    return [totalVal, Object.values(hash)];
   };
 
   render() {
-    const { portfolio, user } = this.props;
+    const { portfolio, user } = this.props,
+      [totalVal, adjPortfolio] = this.postList(portfolio);
 
     return (
       <div className="portFullDiv">
@@ -40,12 +48,10 @@ class Portfolio extends Component {
           <div className="allStockDiv">
             <h4 className="portValueHeader">
               Portfolio Value: $
-              {this.portValue(portfolio)
-                .toString()
-                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+              {totalVal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
             </h4>
 
-            {this.postList(portfolio).map((stock, idx) => (
+            {adjPortfolio.map((stock, idx) => (
               <Stock key={idx} stock={stock} />
             ))}
           </div>

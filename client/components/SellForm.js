@@ -26,6 +26,7 @@ class SellForm extends Component {
   sell = evt => {
     evt.preventDefault();
     const { ticker, quantity } = this.state;
+    // STILL NEED TO COMPLETE SELLING FUNCTION!
   };
 
   render() {

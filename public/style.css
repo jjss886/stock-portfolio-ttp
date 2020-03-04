@@ -226,6 +226,18 @@ h4 {
   margin-bottom: 15px;
 }
 
+.stockColorSame {
+  color: gray;
+}
+
+.stockColorUp {
+  color: green;
+}
+
+.stockColorDown {
+  color: red;
+}
+
 /* -------------------- TRANSCTION -------------------- */
 .transactFullDiv {
 }
@@ -284,7 +296,7 @@ h4 {
 }
 
 .sellFormSelect {
-  height: 25px;
+  height: 30px;
   width: 80px;
   border-radius: 3px;
   font-size: 17px;
