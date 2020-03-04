@@ -26,14 +26,10 @@ class Routes extends Component {
   }
 }
 
-const mapState = state => {
-  return {};
-};
-
 const mapDispatch = dispatch => {
   return {
     me: () => dispatch(me())
   };
 };
 
-export default withRouter(connect(mapState, mapDispatch)(Routes));
+export default withRouter(connect(null, mapDispatch)(Routes));

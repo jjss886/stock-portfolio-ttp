@@ -20,7 +20,15 @@ class Portfolio extends Component {
   portValue = arr => arr.reduce((acm, val) => acm + val.quantity * val.cost, 0);
 
   postList = port => {
-    return port;
+    const hash = port.reduce((acm, val) => {
+      const { ticker, quantity } = val;
+      ticker in acm ? (acm[ticker].quantity += quantity) : (acm[ticker] = val);
+      return acm;
+    }, {});
+
+    // NEED TO ADD IN STOCK VALUE!
+
+    return Object.values(hash);
   };
 
   render() {

@@ -32,6 +32,8 @@ class SellForm extends Component {
     const { portfolio } = this.props;
     return (
       <div className="sellFormFullDiv formFullDiv">
+        <h3 className="formHeader">Cash Out</h3>
+
         <div className="formSectionDiv">
           <label className="sellLabels formLabel" htmlFor="quantity">
             Ticker:{" "}

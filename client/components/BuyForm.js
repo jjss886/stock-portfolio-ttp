@@ -54,6 +54,8 @@ class BuyForm extends Component {
   render() {
     return (
       <div className="buyFormFullDiv formFullDiv">
+        <h3 className="formHeader">Let's Invest</h3>
+
         <div className="formSectionDiv">
           <label className="buyLabels formLabel" htmlFor="ticker">
             Ticker:{" "}

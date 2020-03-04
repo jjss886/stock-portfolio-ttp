@@ -21,9 +21,10 @@ class Transaction extends Component {
       <div className="transactFullDiv">
         Transaction
         {portfolio.length
-          ? portfolio.map((stock, idx) => (
-              <SingleTransact key={idx} stock={stock} />
-            ))
+          ? portfolio
+              .slice()
+              .reverse()
+              .map((stock, idx) => <SingleTransact key={idx} stock={stock} />)
           : null}
       </div>
     );
