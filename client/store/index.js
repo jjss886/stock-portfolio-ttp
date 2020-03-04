@@ -15,18 +15,20 @@ const initialState = {
 // ACTION TYPES
 const GET_USER = "GET_USER";
 const REMOVE_USER = "REMOVE_USER";
+const SET_PORTFOLIO = "SET_PORTFOLIO";
 
 // ACTION CREATORS
 export const getUser = user => ({ type: GET_USER, user });
 export const removeUser = () => ({ type: REMOVE_USER });
+export const setPortfolio = portfolio => ({ type: SET_PORTFOLIO, portfolio });
 
 // THUNKS
 export const me = () => async dispatch => {
   try {
     const res = await axios.get("/auth/me");
-    dispatch(getUser(res.data || defaultUser));
-  } catch (err) {
-    console.error(err);
+    dispatch(getUser(res.data || {}));
+  } catch (error) {
+    console.error("Redux Error -", error);
   }
 };
 
@@ -52,8 +54,17 @@ export const logout = () => async dispatch => {
     await axios.post("/auth/logout");
     dispatch(removeUser());
     history.push("/SignIn");
-  } catch (err) {
-    console.error(err);
+  } catch (error) {
+    console.error("Redux Error -", error);
+  }
+};
+
+export const getPortfolio = userId => async dispatch => {
+  try {
+    const { data: portfolio } = await axios.get(`/api/${userId}`);
+    dispatch(setPortfolio(portfolio));
+  } catch (error) {
+    console.error("Redux Error -", error);
   }
 };
 
@@ -61,9 +72,11 @@ export const logout = () => async dispatch => {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_USER:
-      return action.user;
+      return { ...state, user: action.user };
     case REMOVE_USER:
-      return initialState.user;
+      return { ...state, user: {} };
+    case SET_PORTFOLIO:
+      return { ...state, portfolio: action.portfolio };
     default:
       return state;
   }

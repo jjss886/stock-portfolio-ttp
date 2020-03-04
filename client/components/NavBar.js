@@ -10,7 +10,6 @@ class NavBar extends Component {
 
   render() {
     const userId = this.props.user.id;
-    console.log("nav -", userId);
 
     return (
       <div className="navBarFullDiv">
@@ -30,7 +29,7 @@ class NavBar extends Component {
             </NavLink>
 
             <NavLink
-              to="/Transction"
+              to="/Transaction"
               className="linkText navBarLink"
               activeClassName="selectedNavLink"
               exact
@@ -65,7 +64,8 @@ class NavBar extends Component {
 
 const mapState = state => {
   return {
-    user: state.user
+    user: state.user,
+    state
   };
 };
 

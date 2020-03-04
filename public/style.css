@@ -14,6 +14,10 @@ h3 {
   margin: 0;
 }
 
+h4 {
+  margin: 0;
+}
+
 .linkText {
   text-decoration: none;
   color: black;
@@ -21,7 +25,6 @@ h3 {
 
 .linkText:hover {
   text-decoration: underline;
-  color: peru;
 }
 
 /* -------------------- NAV BAR -------------------- */
@@ -74,7 +77,6 @@ h3 {
   display: flex;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
 }
 
 .appInsideDiv {
@@ -191,4 +193,17 @@ h3 {
 
 .authErrorMessage {
   font-size: 16px;
+}
+
+/* -------------------- PORTFOLIO -------------------- */
+.portFullDiv {
+}
+
+/* -------------------- TRANSCTION -------------------- */
+.transactFullDiv {
+}
+
+/* -------------------- SINGLE TRANSCTION -------------------- */
+.singleTransactFullDiv {
+  margin-bottom: 15px;
 }

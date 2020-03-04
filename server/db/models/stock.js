@@ -5,6 +5,9 @@ const Stock = db.define("stock", {
   ticker: {
     type: Sequelize.STRING
   },
+  name: {
+    type: Sequelize.STRING
+  },
   quantity: {
     type: Sequelize.INTEGER
   },
