@@ -242,10 +242,18 @@ h4 {
 
 /* -------------------- TRANSCTION -------------------- */
 .transactFullDiv {
+  display: flex;
+}
+
+.transactHeader {
+  text-align: center;
+  margin-bottom: 15px;
 }
 
 /* -------------------- SINGLE TRANSCTION -------------------- */
 .singleTransactFullDiv {
+  display: flex;
+  flex-direction: column;
   margin-bottom: 15px;
 }
 

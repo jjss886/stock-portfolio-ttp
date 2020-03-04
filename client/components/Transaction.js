@@ -14,18 +14,47 @@ class Transaction extends Component {
     if (user.id && user.id !== prevProps.user.id) getPortfolio(user.id);
   }
 
+  splitBuySell = portfolio => {
+    const buy = [],
+      sell = [];
+
+    portfolio.forEach(port => {
+      if (port.action === "buy") buy.push(port);
+      else sell.push(port);
+    });
+
+    return [buy, sell];
+  };
+
   render() {
-    const { portfolio } = this.props;
+    const { portfolio } = this.props,
+      [buy, sell] = this.splitBuySell(portfolio);
 
     return (
       <div className="transactFullDiv">
-        Transaction
-        {portfolio.length
-          ? portfolio
+        {portfolio.length ? (
+          <div className="buyTransactDiv">
+            <h3 className="transactHeader">Buy</h3>
+            {buy
               .slice()
               .reverse()
-              .map((stock, idx) => <SingleTransact key={idx} stock={stock} />)
-          : null}
+              .map((stock, idx) => (
+                <SingleTransact key={idx} stock={stock} />
+              ))}
+          </div>
+        ) : null}
+
+        {portfolio.length ? (
+          <div className="sellTransactDiv">
+            <h3 className="transactHeader">Sell</h3>
+            {sell
+              .slice()
+              .reverse()
+              .map((stock, idx) => (
+                <SingleTransact key={idx} stock={stock} />
+              ))}
+          </div>
+        ) : null}
       </div>
     );
   }

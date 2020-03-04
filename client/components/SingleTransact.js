@@ -1,13 +1,13 @@
 import React from "react";
 
 const SingleTransact = ({ stock }) => {
-  const { ticker, name, quantity, value, date } = stock,
+  const { ticker, name, quantity, value, date, action } = stock,
     totalCost = quantity * value;
 
   return (
     <div className="singleTransactFullDiv">
       <h4>
-        {ticker} {name} {date}
+        {ticker} {name} {date} {action}
       </h4>
 
       <span>
