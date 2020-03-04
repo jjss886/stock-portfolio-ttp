@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { withRouter, Route, Switch } from "react-router-dom";
 
 import { Login, Signup } from "./AuthForm";
+import Portfolio from "./Portfolio";
+import Transaction from "./Transaction";
 
 class Routes extends Component {
   render() {
@@ -17,6 +19,8 @@ class Routes extends Component {
             </div>
           )}
         />
+        <Route path="/Portfolio" component={Portfolio} />
+        <Route path="/Transaction" component={Transaction} />
       </Switch>
     );
   }

@@ -10,6 +10,7 @@ class NavBar extends Component {
 
   render() {
     const userId = this.props.user.id;
+    console.log("nav -", userId);
 
     return (
       <div className="navBarFullDiv">
@@ -20,12 +21,21 @@ class NavBar extends Component {
         {userId ? (
           <div className="navBarRight">
             <NavLink
-              to="/"
+              to="/Portfolio"
               className="linkText navBarLink"
               activeClassName="selectedNavLink"
               exact
             >
-              HomePage
+              Portfolio
+            </NavLink>
+
+            <NavLink
+              to="/Transction"
+              className="linkText navBarLink"
+              activeClassName="selectedNavLink"
+              exact
+            >
+              Transction
             </NavLink>
 
             <a
@@ -38,15 +48,6 @@ class NavBar extends Component {
           </div>
         ) : (
           <div className="navBarRight">
-            <NavLink
-              to="/"
-              className="linkText navBarLink"
-              activeClassName="selectedNavLink"
-              exact
-            >
-              HomePage
-            </NavLink>
-
             <NavLink
               to="/SignIn"
               className="linkText navBarLink"
