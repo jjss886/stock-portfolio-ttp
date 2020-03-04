@@ -21,6 +21,10 @@ const User = db.define("user", {
       return () => this.getDataValue("password");
     }
   },
+  cash: {
+    type: Sequelize.FLOAT,
+    defaultValue: 5000
+  },
   salt: {
     type: Sequelize.STRING,
     get() {
