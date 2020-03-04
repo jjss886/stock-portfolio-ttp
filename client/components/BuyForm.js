@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { stockPull, dateCreate } from "../utils/utilities";
-import { addStock } from "../store";
+import { transactStock } from "../store";
 
 class BuyForm extends Component {
   constructor() {
@@ -27,7 +27,7 @@ class BuyForm extends Component {
   buy = async evt => {
     evt.preventDefault();
     const { ticker, quantity } = this.state,
-      { user, addStock } = this.props;
+      { user, transactStock } = this.props;
     if (!ticker || !quantity) return alert("Fill Out Form!");
 
     let res = true;
@@ -38,12 +38,13 @@ class BuyForm extends Component {
         lastestPrice = 290,
         totalCost = lastestPrice * quantity;
       if (totalCost > user.cash) return alert("Not Enough Cash");
-      addStock({
+      transactStock({
         userId: user.id,
         ticker,
         name: companyName,
         quantity,
         cost: lastestPrice,
+        action: "buy",
         date: dateCreate()
       });
     } else alert("No Ticker");
@@ -104,7 +105,7 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    addStock: stockObj => dispatch(addStock(stockObj))
+    transactStock: stockObj => dispatch(transactStock(stockObj))
   };
 };
 

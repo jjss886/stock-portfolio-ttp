@@ -4,6 +4,7 @@ import thunkMiddleware from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import axios from "axios";
 import history from "../utils/history";
+import { stockPull, stockPullTest } from "../utils/utilities";
 
 // INITIAL STATE
 const initialState = {
@@ -16,14 +17,16 @@ const initialState = {
 const GET_USER = "GET_USER";
 const REMOVE_USER = "REMOVE_USER";
 const SET_PORTFOLIO = "SET_PORTFOLIO";
-const ADD_STOCK = "ADD_STOCK";
+const STOCK_TRANSACT = "STOCK_TRANSACT";
+const SET_STOCK = "SET_STOCK";
 
 // ACTION CREATORS
 export const getUser = user => ({ type: GET_USER, user });
 export const removeUser = () => ({ type: REMOVE_USER });
 export const setPortfolio = portfolio => ({ type: SET_PORTFOLIO, portfolio });
+export const setStock = stocks => ({ type: SET_STOCK, stocks });
 export const addPortfolio = (portfolio, user) => ({
-  type: ADD_STOCK,
+  type: STOCK_TRANSACT,
   portfolio,
   user
 });
@@ -74,10 +77,26 @@ export const getPortfolio = userId => async dispatch => {
   }
 };
 
-export const addStock = stockObj => async dispatch => {
+export const transactStock = stockObj => async dispatch => {
   try {
     const { data: user } = await axios.post(`/api/`, stockObj);
     dispatch(addPortfolio(stockObj, user));
+  } catch (error) {
+    console.error("Redux Error -", error);
+  }
+};
+
+export const getLiveStock = portfolio => async dispatch => {
+  try {
+    const stockArr = [];
+
+    Object.keys(portfolio).forEach(stock => {
+      // const stockObj = stockPull(stock); // REAL ONE!
+      const stockObj = stockPullTest(stock); // TESTING!
+      stockArr.push(stockObj);
+    });
+
+    dispatch(setStock(stockArr));
   } catch (error) {
     console.error("Redux Error -", error);
   }
@@ -92,11 +111,16 @@ const reducer = (state = initialState, action) => {
       return { ...state, user: {} };
     case SET_PORTFOLIO:
       return { ...state, portfolio: action.portfolio };
-    case ADD_STOCK:
+    case STOCK_TRANSACT:
       return {
         ...state,
         portfolio: [...state.portfolio, action.portfolio],
         user: action.user
+      };
+    case SET_STOCK:
+      return {
+        ...state,
+        stocks: action.stocks
       };
     default:
       return state;

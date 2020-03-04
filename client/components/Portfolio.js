@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getPortfolio } from "../store";
+import { getPortfolio, getLiveStock } from "../store";
 
 import Stock from "./Stock";
 import BuyForm from "./BuyForm";
@@ -13,21 +13,33 @@ class Portfolio extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { getPortfolio, user } = this.props;
+    const { getPortfolio, user, portfolio, getLiveStock } = this.props;
     if (user.id && user.id !== prevProps.user.id) getPortfolio(user.id);
+    if (portfolio.length && portfolio.length !== prevProps.portfolio.length) {
+      getLiveStock(this.hashStock(portfolio));
+    }
   }
 
-  postList = port => {
-    const hash = port.reduce((acm, val) => {
-      const { ticker, quantity } = val;
-      ticker in acm ? (acm[ticker].quantity += quantity) : (acm[ticker] = val);
+  hashStock = port => {
+    return port.reduce((acm, val) => {
+      const { ticker, quantity, action } = val;
+      if (ticker in acm) {
+        if (action === "buy") acm[ticker].quantity += quantity;
+        else acm[ticker].quantity -= quantity;
+      } else acm[ticker] = val;
+
       return acm;
     }, {});
+  };
 
+  postList = port => {
+    const hash = this.hashStock(port);
     let totalVal = 0;
 
+    console.log("moo -", this.props.stocks);
+
     Object.keys(hash).forEach(key => {
-      // NEED TO ADD IN STOCK VALUE AND OPENING!
+      // !! NEED TO ADD IN STOCK VALUE AND OPENING!
       hash[key].curPrice = Math.floor(Math.random() * 30) + 5;
       hash[key].openPrice = Math.floor(Math.random() * 30) + 5;
 
@@ -35,7 +47,12 @@ class Portfolio extends Component {
       totalVal += hash[key].curPrice * hash[key].quantity;
     });
 
-    return [totalVal, Object.values(hash)];
+    return [
+      totalVal,
+      Object.values(hash).sort(
+        (a, b) => b.quantity * b.curPrice - a.quantity * a.curPrice
+      )
+    ];
   };
 
   render() {
@@ -81,13 +98,15 @@ class Portfolio extends Component {
 const mapState = state => {
   return {
     user: state.user,
-    portfolio: state.portfolio
+    portfolio: state.portfolio,
+    stocks: state.stocks
   };
 };
 
 const mapDispatch = dispatch => {
   return {
-    getPortfolio: userId => dispatch(getPortfolio(userId))
+    getPortfolio: userId => dispatch(getPortfolio(userId)),
+    getLiveStock: portfolio => dispatch(getLiveStock(portfolio))
   };
 };
 

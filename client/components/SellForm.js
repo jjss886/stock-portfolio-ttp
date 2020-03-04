@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { transactStock } from "../store";
 
 class SellForm extends Component {
   constructor() {
@@ -25,8 +26,31 @@ class SellForm extends Component {
 
   sell = evt => {
     evt.preventDefault();
-    const { ticker, quantity } = this.state;
-    // STILL NEED TO COMPLETE SELLING FUNCTION!
+    const { ticker, quantity } = this.state,
+      { user, transactStock } = this.props;
+    if (!ticker || !quantity) return alert("Fill Out Form!");
+
+    // !! STILL NEED TO COMPLETE SELLING FUNCTION!
+    let res = true;
+    // const res = await stockPull(this.state.ticker);
+    if (res) {
+      // const { companyName, lastestPrice } = res,
+      const companyName = "apple",
+        lastestPrice = 290,
+        totalCost = lastestPrice * quantity;
+      if (totalCost > user.cash) return alert("Not Enough Cash");
+      transactStock({
+        userId: user.id,
+        ticker,
+        name: companyName,
+        quantity,
+        cost: lastestPrice,
+        action: "sell",
+        date: dateCreate()
+      });
+    } else alert("No Ticker");
+
+    this.setState({ ticker: "", quantity: "" });
   };
 
   render() {
@@ -85,7 +109,9 @@ const mapState = state => {
 };
 
 const mapDispatch = dispatch => {
-  return {};
+  return {
+    transactStock: stockObj => dispatch(transactStock(stockObj))
+  };
 };
 
 export default connect(mapState, mapDispatch)(SellForm);

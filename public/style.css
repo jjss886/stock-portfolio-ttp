@@ -197,7 +197,7 @@ h4 {
 .portFullDiv {
   display: flex;
   justify-content: space-evenly;
-  width: 60vw;
+  width: 75vw;
 }
 
 .portActionDiv {

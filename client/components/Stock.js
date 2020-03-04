@@ -8,7 +8,7 @@ const Stock = ({ stock }) => {
   return (
     <div className={`stockFullDiv stockColor${priceDelta}`}>
       <h4 className="stockHeader">
-        {ticker} {name}
+        {name} ({ticker})
       </h4>
 
       <span>

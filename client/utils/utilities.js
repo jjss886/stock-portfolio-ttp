@@ -14,7 +14,25 @@ export const stockPull = async ticker => {
     const { data: stockData } = await axios.get(
       `https://cloud.iexapis.com/stable/stock/${ticker}/quote?token=${process.env.iexAPIToken}`
     );
-    console.log("Stock -", stockData);
+    console.log("API HIT ! -", stockData);
+    return stockData;
+  } catch (error) {
+    // SEND BACK ERROR
+    console.error("Stock Error -", error);
+    return false;
+  }
+};
+
+// DUMMY STOCK PULL FUNCTION TO AVOID HITTING API DURING TESTING
+export const stockPullTest = ticker => {
+  try {
+    // PULL STOCK PRICE INFORMATION
+    const stockData = {
+      ticker,
+      name: "Testing Ticker",
+      latestPrice: Math.floor(Math.random() * 30) + 5,
+      openingPrice: Math.floor(Math.random() * 30) + 5
+    };
     return stockData;
   } catch (error) {
     // SEND BACK ERROR

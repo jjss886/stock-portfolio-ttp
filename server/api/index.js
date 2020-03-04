@@ -19,11 +19,11 @@ router.get("/:userId", async (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
   try {
-    const { userId, ticker, name, quantity, cost, date } = req.body,
+    const { userId, ticker, name, quantity, cost, date, action } = req.body,
       totalCost = quantity * cost;
 
     // CREATE NEW STOCK TRANSACTION FOR USER
-    await Stock.create({ userId, ticker, name, quantity, cost, date });
+    await Stock.create({ userId, ticker, name, quantity, cost, date, action });
 
     // NEED TO REDUCE USER'S CASH AMOUNT
     const userProfile = await User.findByPk(userId);
