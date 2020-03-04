@@ -16,3 +16,10 @@ router.get("/:userId", async (req, res, next) => {
     next(error);
   }
 });
+
+router.post("/:userId", async (req, res, next) => {
+  try {
+  } catch (error) {
+    next(error);
+  }
+});

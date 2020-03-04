@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { stockPull } from "../utils/utilities";
 
 class BuyForm extends Component {
   constructor() {
@@ -16,9 +17,9 @@ class BuyForm extends Component {
     });
   };
 
-  buy = evt => {
+  buy = async evt => {
     evt.preventDefault();
-    console.log(this.state);
+    const res = await stockPull(this.state.ticker);
     // BUY STOCK AND REDUCE CASH
     this.setState({ ticker: "", quantity: "" });
   };

@@ -5,7 +5,7 @@ const Stock = ({ stock }) => {
   return (
     <div className="stockFullDiv">
       <h4>
-        {ticker} {name} {date}
+        {ticker} {name}
       </h4>
 
       <span>

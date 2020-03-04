@@ -228,6 +228,21 @@ h4 {
   justify-content: space-evenly;
 }
 
+.formSectionDiv {
+  display: flex;
+  align-items: center;
+}
+
+.buyLabels {
+  width: 100px;
+}
+
+.buyInputs {
+  height: 25px;
+  width: 75px;
+  border-radius: 3px;
+}
+
 .buyBtn {
   height: 30px;
   width: 100px;
