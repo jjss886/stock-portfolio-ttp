@@ -1,7 +1,9 @@
 import React from "react";
 
 const SingleTransact = ({ stock }) => {
-  const { ticker, name, quantity, cost, date } = stock;
+  const { ticker, name, quantity, cost, date } = stock,
+    totalCost = quantity * cost;
+
   return (
     <div className="singleTransactFullDiv">
       <h4>
@@ -9,7 +11,8 @@ const SingleTransact = ({ stock }) => {
       </h4>
 
       <span>
-        Quantity: {quantity} Cost: ${cost} Total: ${quantity * cost}
+        Quantity: {quantity} Cost: ${cost} Total: $
+        {totalCost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
       </span>
     </div>
   );

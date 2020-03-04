@@ -63,7 +63,7 @@ class BuyForm extends Component {
             : 0}
         </h4>
 
-        <form className="buyForm" onSubmit={this.buy}>
+        <form className="buyForm">
           <div className="formSectionDiv">
             <label className="buyLabels" htmlFor="ticker">
               Ticker:{" "}
@@ -96,7 +96,7 @@ class BuyForm extends Component {
             />
           </div>
 
-          <button className="buyBtn" type="submit">
+          <button className="buyBtn" type="submit" onClick={this.buy}>
             Buy
           </button>
         </form>

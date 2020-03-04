@@ -66,9 +66,7 @@ h4 {
 }
 
 .selectedNavLink {
-  border-color: rgba(0, 152, 195, 0.8);
-  border-style: dashed;
-  border-width: 1px;
+  color: rgba(0, 152, 195, 0.8);
 }
 
 /* -------------------- MAIN APP -------------------- */
@@ -249,4 +247,8 @@ h4 {
   width: 100px;
   font-size: 18px;
   border-radius: 5px;
+}
+
+/* -------------------- SELL FORM -------------------- */
+.sellFormFullDiv {
 }

@@ -4,6 +4,7 @@ import { getPortfolio } from "../store";
 
 import Stock from "./Stock";
 import BuyForm from "./BuyForm";
+import SellForm from "./SellForm";
 
 class Portfolio extends Component {
   componentDidMount() {
@@ -29,6 +30,8 @@ class Portfolio extends Component {
         ) : null}
 
         <BuyForm />
+
+        <SellForm />
       </div>
     );
   }

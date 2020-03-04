@@ -17,46 +17,66 @@ class NavBar extends Component {
           <h2 className="navBarHeader">Stock Portfolio TTP</h2>
         </div>
 
-        {userId ? (
-          <div className="navBarRight">
-            <NavLink
-              to="/Portfolio"
-              className="linkText navBarLink"
-              activeClassName="selectedNavLink"
-              exact
-            >
-              Portfolio
-            </NavLink>
+        <div className="navBarRight">
+          <NavLink
+            to="/"
+            className="linkText navBarLink"
+            activeClassName="selectedNavLink"
+            exact
+          >
+            HomePage
+          </NavLink>
 
-            <NavLink
-              to="/Transaction"
-              className="linkText navBarLink"
-              activeClassName="selectedNavLink"
-              exact
-            >
-              Transction
-            </NavLink>
+          {userId ? (
+            <>
+              <NavLink
+                to="/Portfolio"
+                className="linkText navBarLink"
+                activeClassName="selectedNavLink"
+                exact
+              >
+                Portfolio
+              </NavLink>
 
-            <a
-              href="#"
-              onClick={this.loggingOut}
-              className="linkText navBarLink"
-            >
-              Logout
-            </a>
-          </div>
-        ) : (
-          <div className="navBarRight">
-            <NavLink
-              to="/SignIn"
-              className="linkText navBarLink"
-              activeClassName="selectedNavLink"
-              exact
-            >
-              Sign In
-            </NavLink>
-          </div>
-        )}
+              <NavLink
+                to="/Transaction"
+                className="linkText navBarLink"
+                activeClassName="selectedNavLink"
+                exact
+              >
+                Transction
+              </NavLink>
+
+              <a
+                href="#"
+                onClick={this.loggingOut}
+                className="linkText navBarLink"
+              >
+                Logout
+              </a>
+            </>
+          ) : (
+            <>
+              <NavLink
+                to="/LogIn"
+                className="linkText navBarLink"
+                activeClassName="selectedNavLink"
+                exact
+              >
+                Log In
+              </NavLink>
+
+              <NavLink
+                to="/SignUp"
+                className="linkText navBarLink"
+                activeClassName="selectedNavLink"
+                exact
+              >
+                Sign Up
+              </NavLink>
+            </>
+          )}
+        </div>
       </div>
     );
   }
