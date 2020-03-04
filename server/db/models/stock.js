@@ -14,6 +14,12 @@ const Stock = db.define("stock", {
   cost: {
     type: Sequelize.FLOAT
   },
+  action: {
+    type: Sequelize.STRING,
+    validate: {
+      isIn: [["buy", "sell"]]
+    }
+  },
   date: {
     type: Sequelize.DATE
   }

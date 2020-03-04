@@ -18,20 +18,39 @@ class Portfolio extends Component {
   }
 
   render() {
-    const { portfolio } = this.props;
+    const { portfolio, user } = this.props;
+
     return (
       <div className="portFullDiv">
         {portfolio.length ? (
           <div className="allStockDiv">
+            <h4>
+              Portfolio Value:{" "}
+              {portfolio.reduce((acm, val) => acm + val.quantity * val.cost, 0)}
+            </h4>
+
             {portfolio.map((stock, idx) => (
               <Stock key={idx} stock={stock} />
             ))}
           </div>
-        ) : null}
+        ) : (
+          <h3>Loading</h3>
+        )}
 
-        <BuyForm />
+        <div className="portFormFullDiv">
+          <h4 className="cashHeader">
+            Cash - $
+            {user.cash
+              ? user.cash.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+              : 0}
+          </h4>
 
-        <SellForm />
+          <div className="portFormFullDiv">
+            <BuyForm />
+
+            <SellForm />
+          </div>
+        </div>
       </div>
     );
   }

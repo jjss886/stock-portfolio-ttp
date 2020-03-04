@@ -52,17 +52,8 @@ class BuyForm extends Component {
   };
 
   render() {
-    const { user } = this.props;
-
     return (
       <div className="buyFormFullDiv">
-        <h4>
-          Cash - $
-          {user.cash
-            ? user.cash.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-            : 0}
-        </h4>
-
         <form className="buyForm">
           <div className="formSectionDiv">
             <label className="buyLabels" htmlFor="ticker">

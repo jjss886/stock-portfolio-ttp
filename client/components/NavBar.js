@@ -44,7 +44,7 @@ class NavBar extends Component {
                 activeClassName="selectedNavLink"
                 exact
               >
-                Transction
+                Transaction
               </NavLink>
 
               <a
