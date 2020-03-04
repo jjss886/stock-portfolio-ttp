@@ -16,11 +16,17 @@ const initialState = {
 const GET_USER = "GET_USER";
 const REMOVE_USER = "REMOVE_USER";
 const SET_PORTFOLIO = "SET_PORTFOLIO";
+const ADD_STOCK = "ADD_STOCK";
 
 // ACTION CREATORS
 export const getUser = user => ({ type: GET_USER, user });
 export const removeUser = () => ({ type: REMOVE_USER });
 export const setPortfolio = portfolio => ({ type: SET_PORTFOLIO, portfolio });
+export const addPortfolio = (portfolio, user) => ({
+  type: ADD_STOCK,
+  portfolio,
+  user
+});
 
 // THUNKS
 export const me = () => async dispatch => {
@@ -68,6 +74,15 @@ export const getPortfolio = userId => async dispatch => {
   }
 };
 
+export const addStock = stockObj => async dispatch => {
+  try {
+    const { data: user } = await axios.post(`/api/`, stockObj);
+    dispatch(addPortfolio(stockObj, user));
+  } catch (error) {
+    console.error("Redux Error -", error);
+  }
+};
+
 // REDUCER
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -77,6 +92,12 @@ const reducer = (state = initialState, action) => {
       return { ...state, user: {} };
     case SET_PORTFOLIO:
       return { ...state, portfolio: action.portfolio };
+    case ADD_STOCK:
+      return {
+        ...state,
+        portfolio: [...state.portfolio, action.portfolio],
+        user: action.user
+      };
     default:
       return state;
   }

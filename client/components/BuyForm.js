@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { stockPull } from "../utils/utilities";
+import { stockPull, dateCreate } from "../utils/utilities";
+import { addStock } from "../store";
 
 class BuyForm extends Component {
   constructor() {
@@ -12,15 +13,41 @@ class BuyForm extends Component {
   }
 
   handleChange = evt => {
+    let { name, value } = evt.target;
+    if (name === "quantity") {
+      if (isNaN(value)) return alert("Numbers!");
+      else value = Number(value);
+    }
+
     this.setState({
-      [evt.target.name]: evt.target.value
+      [name]: value
     });
   };
 
   buy = async evt => {
     evt.preventDefault();
-    const res = await stockPull(this.state.ticker);
-    // BUY STOCK AND REDUCE CASH
+    const { ticker, quantity } = this.state,
+      { user, addStock } = this.props;
+    if (!ticker || !quantity) return alert("Fill Out Form!");
+
+    let res = true;
+    // const res = await stockPull(this.state.ticker);
+    if (res) {
+      // const { companyName, lastestPrice } = res,
+      const companyName = "apple",
+        lastestPrice = 290,
+        totalCost = lastestPrice * quantity;
+      if (totalCost > user.cash) return alert("Not Enough Cash");
+      addStock({
+        userId: user.id,
+        ticker,
+        name: companyName,
+        quantity,
+        cost: lastestPrice,
+        date: dateCreate()
+      });
+    } else alert("No Ticker");
+
     this.setState({ ticker: "", quantity: "" });
   };
 
@@ -85,7 +112,9 @@ const mapState = state => {
 };
 
 const mapDispatch = dispatch => {
-  return {};
+  return {
+    addStock: stockObj => dispatch(addStock(stockObj))
+  };
 };
 
 export default connect(mapState, mapDispatch)(BuyForm);
