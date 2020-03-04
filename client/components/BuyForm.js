@@ -53,44 +53,42 @@ class BuyForm extends Component {
 
   render() {
     return (
-      <div className="buyFormFullDiv">
-        <form className="buyForm">
-          <div className="formSectionDiv">
-            <label className="buyLabels" htmlFor="ticker">
-              Ticker:{" "}
-            </label>
-            <input
-              className="buyInputs"
-              type="text"
-              name="ticker"
-              value={this.state.ticker}
-              onChange={this.handleChange}
-              placeholder="Ticker"
-              onFocus={e => (e.target.placeholder = "")}
-              onBlur={e => (e.target.placeholder = "Ticker")}
-            />
-          </div>
+      <div className="buyFormFullDiv formFullDiv">
+        <div className="formSectionDiv">
+          <label className="buyLabels formLabel" htmlFor="ticker">
+            Ticker:{" "}
+          </label>
+          <input
+            className="buyInputs formInput"
+            type="text"
+            name="ticker"
+            value={this.state.ticker}
+            onChange={this.handleChange}
+            placeholder="Ticker"
+            onFocus={e => (e.target.placeholder = "")}
+            onBlur={e => (e.target.placeholder = "Ticker")}
+          />
+        </div>
 
-          <div className="formSectionDiv">
-            <label className="buyLabels" htmlFor="quantity">
-              Quantity:{" "}
-            </label>
-            <input
-              className="buyInputs"
-              type="text"
-              name="quantity"
-              value={this.state.quantity}
-              onChange={this.handleChange}
-              placeholder="Quantity"
-              onFocus={e => (e.target.placeholder = "")}
-              onBlur={e => (e.target.placeholder = "Quantity")}
-            />
-          </div>
+        <div className="formSectionDiv">
+          <label className="buyLabels formLabel" htmlFor="quantity">
+            Quantity:{" "}
+          </label>
+          <input
+            className="buyInputs formInput"
+            type="text"
+            name="quantity"
+            value={this.state.quantity}
+            onChange={this.handleChange}
+            placeholder="Quantity"
+            onFocus={e => (e.target.placeholder = "")}
+            onBlur={e => (e.target.placeholder = "Quantity")}
+          />
+        </div>
 
-          <button className="buyBtn" type="submit" onClick={this.buy}>
-            Buy
-          </button>
-        </form>
+        <button className="buyBtn formBtn" type="submit" onClick={this.buy}>
+          Buy
+        </button>
       </div>
     );
   }

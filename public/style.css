@@ -199,6 +199,28 @@ h4 {
   justify-content: space-evenly;
   width: 60vw;
 }
+
+.portActionDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 450px;
+}
+
+.cashHeader {
+  margin-bottom: 15px;
+}
+
+.portFormFullDiv {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.portValueHeader {
+  margin-bottom: 15px;
+}
+
 /* -------------------- STOCK -------------------- */
 .stockFullDiv {
   margin-bottom: 15px;
@@ -213,17 +235,32 @@ h4 {
   margin-bottom: 15px;
 }
 
-/* -------------------- BUY FORM -------------------- */
-.buyFormFullDiv {
-  display: flex;
-  flex-direction: column;
-}
-
-.buyForm {
+/* -------------------- FORM -------------------- */
+.formFullDiv {
   min-height: 150px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.formLabel {
+  width: 100px;
+}
+
+.formInput {
+  height: 25px;
+  width: 75px;
+  border-radius: 3px;
+  font-size: 17px;
+}
+
+.formBtn {
+  height: 30x;
+  width: 100px;
+  font-size: 18px;
+  border-radius: 5px;
 }
 
 .formSectionDiv {
@@ -231,24 +268,19 @@ h4 {
   align-items: center;
 }
 
-.buyLabels {
-  width: 100px;
-}
-
-.buyInputs {
-  height: 25px;
-  width: 75px;
-  border-radius: 3px;
-  font-size: 17px;
-}
-
-.buyBtn {
-  height: 30px;
-  width: 100px;
-  font-size: 18px;
-  border-radius: 5px;
+/* -------------------- BUY FORM -------------------- */
+.buyFormFullDiv {
+  background-color: aqua;
 }
 
 /* -------------------- SELL FORM -------------------- */
 .sellFormFullDiv {
+  background-color: coral;
+}
+
+.sellFormSelect {
+  height: 25px;
+  width: 75px;
+  border-radius: 3px;
+  font-size: 17px;
 }

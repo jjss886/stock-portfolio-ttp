@@ -17,6 +17,12 @@ class Portfolio extends Component {
     if (user.id && user.id !== prevProps.user.id) getPortfolio(user.id);
   }
 
+  portValue = arr => arr.reduce((acm, val) => acm + val.quantity * val.cost, 0);
+
+  postList = port => {
+    return port;
+  };
+
   render() {
     const { portfolio, user } = this.props;
 
@@ -24,12 +30,14 @@ class Portfolio extends Component {
       <div className="portFullDiv">
         {portfolio.length ? (
           <div className="allStockDiv">
-            <h4>
-              Portfolio Value:{" "}
-              {portfolio.reduce((acm, val) => acm + val.quantity * val.cost, 0)}
+            <h4 className="portValueHeader">
+              Portfolio Value: $
+              {this.portValue(portfolio)
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
             </h4>
 
-            {portfolio.map((stock, idx) => (
+            {this.postList(portfolio).map((stock, idx) => (
               <Stock key={idx} stock={stock} />
             ))}
           </div>
@@ -37,9 +45,9 @@ class Portfolio extends Component {
           <h3>Loading</h3>
         )}
 
-        <div className="portFormFullDiv">
+        <div className="portActionDiv">
           <h4 className="cashHeader">
-            Cash - $
+            Cash: $
             {user.cash
               ? user.cash.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
               : 0}

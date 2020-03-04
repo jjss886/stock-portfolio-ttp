@@ -10,7 +10,9 @@ class SellForm extends Component {
     };
   }
 
-  handleTickerChange = evt => {};
+  handleTickerChange = evt => {
+    this.setState({ ticker: evt.target.value });
+  };
 
   handleChange = evt => {
     const { name, value } = evt.target;
@@ -29,36 +31,43 @@ class SellForm extends Component {
   render() {
     const { portfolio } = this.props;
     return (
-      <div className="sellFormFullDiv">
-        <select
-          className="sellFormSelect"
-          value={this.state.ticker}
-          onChange={this.handleTickerChange}
-        >
-          {portfolio.length
-            ? portfolio.map((stock, idx) => (
-                <option key={idx} className="sellTickerOption">
-                  {stock.ticker}
-                </option>
-              ))
-            : null}
-        </select>
+      <div className="sellFormFullDiv formFullDiv">
+        <div className="formSectionDiv">
+          <label className="sellLabels formLabel" htmlFor="quantity">
+            Ticker:{" "}
+          </label>
+          <select
+            className="sellFormSelect"
+            value={this.state.ticker}
+            onChange={this.handleTickerChange}
+          >
+            {portfolio.length
+              ? portfolio.map((stock, idx) => (
+                  <option key={idx} className="sellTickerOption">
+                    {stock.ticker}
+                  </option>
+                ))
+              : null}
+          </select>
+        </div>
 
-        <label className="sellLabels" htmlFor="quantity">
-          Quantity:{" "}
-        </label>
-        <input
-          className="sellInputs"
-          type="text"
-          name="quantity"
-          value={this.state.quantity}
-          onChange={this.handleChange}
-          placeholder="Quantity"
-          onFocus={e => (e.target.placeholder = "")}
-          onBlur={e => (e.target.placeholder = "Quantity")}
-        />
+        <div className="formSectionDiv">
+          <label className="sellLabels formLabel" htmlFor="quantity">
+            Quantity:{" "}
+          </label>
+          <input
+            className="sellInputs formInput"
+            type="text"
+            name="quantity"
+            value={this.state.quantity}
+            onChange={this.handleChange}
+            placeholder="Quantity"
+            onFocus={e => (e.target.placeholder = "")}
+            onBlur={e => (e.target.placeholder = "Quantity")}
+          />
+        </div>
 
-        <button type="button" className="sellBtn" onClick={this.sell}>
+        <button className="sellBtn formBtn" type="button" onClick={this.sell}>
           Sell
         </button>
       </div>
