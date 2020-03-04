@@ -6,9 +6,14 @@ import Stock from "./Stock";
 import BuyForm from "./BuyForm";
 
 class Portfolio extends Component {
+  componentDidMount() {
+    const { getPortfolio, user } = this.props;
+    if (user.id) getPortfolio(user.id);
+  }
+
   componentDidUpdate(prevProps) {
     const { getPortfolio, user } = this.props;
-    if (user.id !== prevProps.user.id) getPortfolio(user.id);
+    if (user.id && user.id !== prevProps.user.id) getPortfolio(user.id);
   }
 
   render() {
