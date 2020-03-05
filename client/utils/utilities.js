@@ -51,6 +51,8 @@ export const hashStock = port => {
       else acm[ticker].quantity -= quantity;
     } else acm[ticker] = Object.assign({}, val);
 
+    if (acm[ticker].quantity === 0) delete acm[ticker];
+
     return acm;
   }, {});
 };

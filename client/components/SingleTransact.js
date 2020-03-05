@@ -6,11 +6,11 @@ const SingleTransact = ({ stock }) => {
 
   return (
     <div className="singleTransactFullDiv">
-      <h4>
+      <h4 className="singleTransHeader">
         {ticker} {name} {date} {action}
       </h4>
 
-      <span>
+      <span className="singleTransSpan">
         Quantity: {quantity} Cost: ${value} Total: $
         {totalCost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
       </span>

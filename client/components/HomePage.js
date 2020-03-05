@@ -1,8 +1,13 @@
 import React from "react";
 
 const HomePage = () => (
-  <div>
-    <h1>Home</h1>
+  <div className="homePageDiv">
+    <h1 className="homePageHeader">Become a Billionaire Here!</h1>
+
+    <img
+      className="homeImg"
+      src="https://g.foolcdn.com/editorial/images/539491/getty-stock-market-success.jpg"
+    />
   </div>
 );
 

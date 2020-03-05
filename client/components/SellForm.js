@@ -28,7 +28,7 @@ class SellForm extends Component {
   sell = evt => {
     evt.preventDefault();
     const { ticker, quantity } = this.state,
-      { user, transactStock } = this.props;
+      { user, transactStock, portfolio } = this.props;
     if (!ticker || !quantity) return alert("Fill Out Form!");
 
     // !! STILL NEED TO COMPLETE SELLING FUNCTION!
@@ -37,9 +37,10 @@ class SellForm extends Component {
     if (res) {
       // const { companyName, lastestPrice } = res,
       const companyName = "apple",
-        lastestPrice = 290,
-        totalCost = lastestPrice * quantity;
-      if (totalCost > user.cash) return alert("Not Enough Cash");
+        lastestPrice = 290;
+
+      if (quantity > portfolio[quantity]) return alert("Selling too many");
+
       transactStock({
         userId: user.id,
         ticker,

@@ -56,20 +56,22 @@ class Portfolio extends Component {
 
     return (
       <div className="portFullDiv">
-        {portfolio.length ? (
-          <div className="allStockDiv">
-            <h4 className="portValueHeader">
-              Portfolio Value: $
-              {totalVal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-            </h4>
+        <div className="allStockDiv">
+          <h4 className="portValueHeader">
+            Portfolio Value: $
+            {totalVal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+          </h4>
 
-            {adjPortfolio.map((stock, idx) => (
-              <Stock key={idx} stock={stock} />
-            ))}
+          <div className="portStockDiv">
+            {portfolio.length ? (
+              adjPortfolio.map((stock, idx) => (
+                <Stock key={idx} stock={stock} />
+              ))
+            ) : (
+              <span className="portNoStock">Buy Some Stocks!</span>
+            )}
           </div>
-        ) : (
-          <h3>Loading</h3>
-        )}
+        </div>
 
         <div className="portActionDiv">
           <h4 className="cashHeader">
