@@ -5,6 +5,7 @@ import { me } from "../store";
 
 import Routes from "./Routes";
 import NavBar from "./NavBar";
+import ErrorMsg from "./ErrorMsg";
 
 class App extends Component {
   componentDidMount() {
@@ -14,6 +15,8 @@ class App extends Component {
   render() {
     return (
       <div className="appFullDiv">
+        <ErrorMsg />
+
         <NavBar />
 
         <div className="appInsideDiv">

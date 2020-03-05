@@ -10,7 +10,9 @@ import { stockPull, stockPullTest } from "../utils/utilities";
 const initialState = {
   user: {},
   stocks: {},
-  portfolio: []
+  portfolio: [],
+  error: false,
+  errorMsg: ""
 };
 
 // -------------- ACTION TYPES --------------
@@ -19,6 +21,7 @@ const REMOVE_USER = "REMOVE_USER";
 const SET_PORTFOLIO = "SET_PORTFOLIO";
 const STOCK_TRANSACT = "STOCK_TRANSACT";
 const SET_STOCK = "SET_STOCK";
+const SET_ERROR = "SET_ERROR";
 
 // -------------- ACTION CREATORS --------------
 export const getUser = user => ({ type: GET_USER, user });
@@ -30,6 +33,7 @@ export const addPortfolio = (portfolio, user) => ({
   portfolio,
   user
 });
+export const setError = (errorMsg = "") => ({ type: SET_ERROR, errorMsg });
 
 // -------------- THUNKS --------------
 export const me = () => async dispatch => {
@@ -121,6 +125,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         stocks: action.stocks
+      };
+    case SET_ERROR:
+      return {
+        ...state,
+        error: !state.error,
+        errorMsg: action.errorMsg
       };
     default:
       return state;

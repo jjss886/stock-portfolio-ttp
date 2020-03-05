@@ -37,26 +37,30 @@ class Transaction extends Component {
     return (
       <div className="transactFullDiv">
         {portfolio.length ? (
-          <div className="buyTransactDiv transactDiv">
-            <h3 className="transactHeader">Buy</h3>
-            {buy
-              .slice()
-              .reverse()
-              .map((stock, idx) => (
-                <SingleTransact key={idx} stock={stock} />
-              ))}
+          <div className="transactOuterDiv">
+            <div className="buyTransactDiv transactDiv">
+              <h3 className="transactHeader">Buy</h3>
+              {buy
+                .slice()
+                .reverse()
+                .map((stock, idx) => (
+                  <SingleTransact key={idx} stock={stock} />
+                ))}
+            </div>
           </div>
         ) : null}
 
         {portfolio.length ? (
-          <div className="sellTransactDiv transactDiv">
-            <h3 className="transactHeader">Sell</h3>
-            {sell
-              .slice()
-              .reverse()
-              .map((stock, idx) => (
-                <SingleTransact key={idx} stock={stock} />
-              ))}
+          <div className="transactOuterDiv">
+            <div className="sellTransactDiv transactDiv">
+              <h3 className="transactHeader">Sell</h3>
+              {sell
+                .slice()
+                .reverse()
+                .map((stock, idx) => (
+                  <SingleTransact key={idx} stock={stock} />
+                ))}
+            </div>
           </div>
         ) : null}
       </div>

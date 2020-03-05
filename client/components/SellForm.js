@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { hashStock, dateCreate } from "../utils/utilities";
-import { transactStock } from "../store";
+import { transactStock, setError } from "../store";
 
 class SellForm extends Component {
   constructor() {
@@ -28,8 +28,10 @@ class SellForm extends Component {
   sell = evt => {
     evt.preventDefault();
     const { ticker, quantity } = this.state,
-      { user, transactStock, portfolio } = this.props;
-    if (!ticker || !quantity) return alert("Fill Out Form!");
+      { user, transactStock, portfolio, setError } = this.props,
+      hash = hashStock(portfolio);
+    if (ticker === "--" || !quantity)
+      return setError("Please fill out the whole form!");
 
     // !! STILL NEED TO COMPLETE SELLING FUNCTION!
     let res = true;
@@ -39,18 +41,21 @@ class SellForm extends Component {
       const companyName = "apple",
         lastestPrice = 290;
 
-      if (quantity > portfolio[quantity]) return alert("Selling too many");
+      console.log("hmm -", quantity, hash[ticker]);
 
-      transactStock({
-        userId: user.id,
-        ticker,
-        name: companyName,
-        quantity,
-        value: lastestPrice,
-        action: "sell",
-        date: dateCreate()
-      });
-    } else alert("No Ticker");
+      if (quantity > hash[ticker].quantity) setError("Selling too many");
+      else {
+        transactStock({
+          userId: user.id,
+          ticker,
+          name: companyName,
+          quantity,
+          value: lastestPrice,
+          action: "sell",
+          date: dateCreate()
+        });
+      }
+    } else setError("No Ticker");
 
     this.setState({ ticker: "", quantity: "" });
   };
@@ -114,7 +119,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    transactStock: stockObj => dispatch(transactStock(stockObj))
+    transactStock: stockObj => dispatch(transactStock(stockObj)),
+    setError: msg => dispatch(setError(msg))
   };
 };
 

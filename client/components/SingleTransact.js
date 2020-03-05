@@ -1,13 +1,14 @@
 import React from "react";
 
 const SingleTransact = ({ stock }) => {
-  const { ticker, name, quantity, value, date, action } = stock,
-    totalCost = quantity * value;
+  const { ticker, name, quantity, value, date } = stock,
+    totalCost = quantity * value,
+    dateObj = new Date(date);
 
   return (
     <div className="singleTransactFullDiv">
       <h4 className="singleTransHeader">
-        {ticker} {name} {date} {action}
+        {ticker} {name} {dateObj.toDateString()}
       </h4>
 
       <span className="singleTransSpan">

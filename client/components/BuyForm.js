@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { stockPull, dateCreate } from "../utils/utilities";
-import { transactStock } from "../store";
+import { transactStock, setError } from "../store";
 
 class BuyForm extends Component {
   constructor() {
@@ -105,7 +105,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    transactStock: stockObj => dispatch(transactStock(stockObj))
+    transactStock: stockObj => dispatch(transactStock(stockObj)),
+    setError: msg => dispatch(setError(msg))
   };
 };
 
