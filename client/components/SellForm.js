@@ -17,8 +17,9 @@ class SellForm extends Component {
   };
 
   handleChange = evt => {
-    const { name, value } = evt.target;
-    if (isNaN(value)) return alert("Numbers!");
+    const { name, value } = evt.target,
+      { setError } = this.props;
+    if (isNaN(value)) return setError("Only include numbers");
 
     this.setState({
       [name]: Number(value)
@@ -41,8 +42,6 @@ class SellForm extends Component {
       const companyName = "apple",
         lastestPrice = 290;
 
-      console.log("hmm -", quantity, hash[ticker]);
-
       if (quantity > hash[ticker].quantity) setError("Selling too many");
       else {
         transactStock({
@@ -55,9 +54,9 @@ class SellForm extends Component {
           date: dateCreate()
         });
       }
-    } else setError("No Ticker");
+    } else setError("Not a valid ticker");
 
-    this.setState({ ticker: "", quantity: "" });
+    this.setState({ ticker: "--", quantity: "" });
   };
 
   render() {

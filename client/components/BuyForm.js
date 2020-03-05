@@ -13,9 +13,10 @@ class BuyForm extends Component {
   }
 
   handleChange = evt => {
+    const { setError } = this.props;
     let { name, value } = evt.target;
     if (name === "quantity") {
-      if (isNaN(value)) return alert("Numbers!");
+      if (isNaN(value)) return setError("Only include numbers");
       else value = Number(value);
     }
 
@@ -28,7 +29,8 @@ class BuyForm extends Component {
     evt.preventDefault();
     const { ticker, quantity } = this.state,
       { user, transactStock } = this.props;
-    if (!ticker || !quantity) return alert("Fill Out Form!");
+    if (!ticker || !quantity)
+      return setError("Please fill out the whole form!");
 
     let res = true;
     // const res = await stockPull(this.state.ticker);
@@ -37,7 +39,7 @@ class BuyForm extends Component {
       const companyName = "apple",
         lastestPrice = 120,
         totalCost = lastestPrice * quantity;
-      if (totalCost > user.cash) return alert("Not Enough Cash");
+      if (totalCost > user.cash) return setError("Not Enough Cash");
       transactStock({
         userId: user.id,
         ticker,
@@ -47,7 +49,7 @@ class BuyForm extends Component {
         action: "buy",
         date: dateCreate()
       });
-    } else alert("No Ticker");
+    } else setError("Not a valid ticker");
 
     this.setState({ ticker: "", quantity: "" });
   };
