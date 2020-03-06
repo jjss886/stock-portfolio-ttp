@@ -15,14 +15,22 @@ const Stock = ({ stock }) => {
         </span>
       </h4>
 
-      <span className="stockSpan">
-        Quantity: {quantity} Total Value: $
-        {totalVal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-      </span>
+      <div className="stockSpanDiv">
+        <span className="stockSpan stockSpanOne">Quantity: {quantity}</span>
 
-      <span className="stockSpan">
-        Current Price: ${curPrice} Open Price: ${openPrice}
-      </span>
+        <span className="stockSpan">
+          Total Value: $
+          {totalVal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+        </span>
+      </div>
+
+      <div className="stockSpanDiv">
+        <span className="stockSpan stockSpanOne">
+          Current Price: ${curPrice}
+        </span>
+
+        <span className="stockSpan">Open Price: ${openPrice}</span>
+      </div>
     </div>
   );
 };

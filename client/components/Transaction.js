@@ -38,14 +38,14 @@ class Transaction extends Component {
         <div className="transBuySellDiv">
           {portfolio.length ? (
             <div className="transactOuterDiv">
-              <h3 className="transactHeader">Buy</h3>
+              <h3 className="transactHeader">Buy History</h3>
 
               <div className="buyTransactDiv transactDiv">
                 {buy
                   .slice()
                   .reverse()
                   .map((stock, idx) => (
-                    <SingleTransact key={idx} stock={stock} />
+                    <SingleTransact key={idx} idx={idx} stock={stock} />
                   ))}
               </div>
             </div>
@@ -53,14 +53,14 @@ class Transaction extends Component {
 
           {portfolio.length ? (
             <div className="transactOuterDiv">
-              <h3 className="transactHeader">Sell</h3>
+              <h3 className="transactHeader">Sell History</h3>
 
               <div className="sellTransactDiv transactDiv">
                 {sell
                   .slice()
                   .reverse()
                   .map((stock, idx) => (
-                    <SingleTransact key={idx} stock={stock} />
+                    <SingleTransact key={idx} idx={idx} stock={stock} />
                   ))}
               </div>
             </div>
