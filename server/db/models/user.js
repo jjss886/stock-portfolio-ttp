@@ -9,14 +9,20 @@ const User = db.define("user", {
     allowNull: false,
     validate: {
       notEmpty: true,
-      isEmail: true
+      isEmail: { arg: true, msg: "Please enter valid email!" }
     }
   },
   name: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    validate: {
+      notEmpty: { args: true, msg: "Please fill in a name!" }
+    }
   },
   password: {
     type: Sequelize.STRING,
+    validate: {
+      notEmpty: { args: true, msg: "Please enter a password!" }
+    },
     get() {
       return () => this.getDataValue("password");
     }

@@ -15,10 +15,10 @@ router.post("/login", async (req, res, next) => {
     // CHECKING USER EXISTENCE AND CRITERIA
     if (!user) {
       console.log("No such user found:", email);
-      res.status(401).send("Wrong username and/or password");
+      res.status(401).send("Wrong email and/or password");
     } else if (!user.correctPassword(password)) {
       console.log("Incorrect password for user:", email);
-      res.status(401).send("Wrong username and/or password");
+      res.status(401).send("Wrong email and/or password");
     } else {
       // IF USER CHECKOUTS THEN SEND BACK TO FRONTEND
       req.login(user, err => (err ? next(err) : res.json(user)));

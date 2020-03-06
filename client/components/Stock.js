@@ -7,8 +7,8 @@ const Stock = ({ stock }) => {
     arrow = arrowSymbol[priceDelta];
 
   return (
-    <div className={`stockFullDiv stockColor${priceDelta}`}>
-      <h4 className="stockHeader">
+    <div className="stockFullDiv">
+      <h4 className={`stockHeader stockColor${priceDelta}`}>
         {name} ({ticker}){" "}
         <span className="stockArrow">
           {priceDelta !== "Same" ? String.fromCharCode(arrow) : null}

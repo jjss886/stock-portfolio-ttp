@@ -11,7 +11,7 @@ class Portfolio extends Component {
   constructor() {
     super();
     this.state = {
-      key: ""
+      update: false
     };
   }
 
@@ -25,19 +25,21 @@ class Portfolio extends Component {
   }
 
   componentWillUnmount() {
+    this.setState({ update: false });
     clearInterval(this.stockInterval);
   }
 
   componentDidUpdate(prevProps) {
     const { getPortfolio, user, portfolio, getLiveStock } = this.props;
     if (user.id && user.id !== prevProps.user.id) getPortfolio(user.id);
-    if (portfolio.length && portfolio.length !== prevProps.portfolio.length) {
+    if (portfolio.length && !this.state.update) {
       getLiveStock(hashStock(portfolio));
       this.stockTimer();
     }
   }
 
   stockTimer = () => {
+    this.setState({ update: true });
     this.stockInterval = setInterval(this.stockUpdate, 2000);
   };
 
@@ -83,8 +85,8 @@ class Portfolio extends Component {
       <div className="portFullDiv">
         <div className="allStockDiv">
           <h4 className="portValueHeader">
-            {user.name}'s Portfolio: $
-            {totalVal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+            {user.name ? `${user.name.split(" ")[0]}'s` : "Loading"} Portfolio:
+            ${totalVal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
           </h4>
 
           <div className="portStockDiv">
@@ -100,7 +102,7 @@ class Portfolio extends Component {
 
         <div className="portActionDiv">
           <h4 className="cashHeader">
-            Cash: $
+            Cash Balance: $
             {user.cash
               ? user.cash.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
               : 0}

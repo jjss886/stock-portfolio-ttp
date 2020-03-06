@@ -5,7 +5,8 @@ import { auth } from "../store";
 
 class AuthForm extends Component {
   componentDidUpdate() {
-    if (this.props.user.id) this.props.history.push("/");
+    const { user, history } = this.props;
+    if (user.id) history.push("/");
   }
 
   handleSignIn = evt => {
@@ -62,7 +63,7 @@ class AuthForm extends Component {
             </div>
 
             {error && error.response && (
-              <div className="authErrorMessage"> {error.response.data} </div>
+              <span className="authErrorMessage"> {error.response.data} </span>
             )}
           </div>
 

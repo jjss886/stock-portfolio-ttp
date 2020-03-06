@@ -28,7 +28,7 @@ class BuyForm extends Component {
   buy = async evt => {
     evt.preventDefault();
     const { ticker, quantity } = this.state,
-      { user, transactStock } = this.props;
+      { user, transactStock, setError } = this.props;
     if (!ticker || !quantity)
       return setError("Please fill out the whole form!");
 
