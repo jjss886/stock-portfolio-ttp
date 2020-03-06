@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { hashStock, refreshTime } from "../utils/utilities";
+import { hashStock, refreshTime, updateCap } from "../utils/utilities";
 import { getPortfolio, getLiveStock, setError } from "../store";
 
 import StyleForm from "./StyleForm";
@@ -64,7 +64,7 @@ class Portfolio extends Component {
     const { portfolio, getLiveStock, setError } = this.props,
       { update } = this.state;
 
-    if (update >= 10) {
+    if (update >= updateCap) {
       clearInterval(this.stockInterval);
       setError("Are you still here?");
       this.setState({ update: 0 });
@@ -95,13 +95,13 @@ class Portfolio extends Component {
           stocks[key] = {};
           stocks[key].latestPrice = 0;
           stocks[key].openingPrice = 0;
-          stocks[key].closingPrice = 0;
+          stocks[key].previousClose = 0;
         }
 
         hash[key].curPrice =
           style === "Last Price"
             ? stocks[key].latestPrice
-            : stocks[key].closingPrice;
+            : stocks[key].previousClose;
         hash[key].openPrice = stocks[key].openingPrice;
 
         // ACCUMULATING TOTAL PORTFOLIO VALUE
@@ -109,7 +109,7 @@ class Portfolio extends Component {
       });
     }
 
-    return [totalVal, Object.values(hash)];
+    return [Math.round(totalVal), Object.values(hash)];
   };
 
   render() {

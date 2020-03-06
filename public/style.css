@@ -218,7 +218,7 @@ h4 {
   display: flex;
   justify-content: space-evenly;
   margin-top: 20px;
-  width: 75vw;
+  width: 90vw;
 }
 
 .portActionDiv {
@@ -270,7 +270,7 @@ h4 {
   border-style: solid;
   border-color: black;
   border-width: 2px;
-  width: 350px;
+  width: 400px;
   min-height: 250px;
   max-height: 450px;
   border-radius: 5px;
@@ -332,7 +332,7 @@ h4 {
   display: flex;
   flex-direction: column;
   background-color: lightgray;
-  width: 500px;
+  min-width: 500px;
   min-height: 100px;
   padding: 15px;
   border-radius: 5px;
@@ -414,7 +414,7 @@ h4 {
 }
 
 .stockSpanOne {
-  width: 175px;
+  width: 190px;
 }
 
 /* -------------------- FORM -------------------- */
@@ -539,7 +539,7 @@ h4 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 425px;
+  width: 320px;
 }
 
 .styleFormheader {
@@ -554,7 +554,7 @@ h4 {
 .styleFormInsideDiv {
   display: flex;
   flex-direction: column;
-  width: 60%;
+  width: 90%;
   height: 250px;
   background-color: rgb(149, 202, 182);
   padding: 15px;

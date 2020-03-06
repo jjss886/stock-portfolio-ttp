@@ -55,12 +55,12 @@ class SellForm extends Component {
     const res = true;
     // const res = await stockPull(this.state.ticker);
     if (res) {
-      // const { companyName, lastestPrice, closingPrice } = res,
       const companyName = "apple",
-        closingPrice = 300,
+        previousClose = 300,
         lastestPrice = 250;
+      // const { companyName, lastestPrice, previousClose } = res;
       const subjectPrice =
-        style === "Last Closing" ? closingPrice : lastestPrice;
+        style === "Last Closing" ? previousClose : lastestPrice;
 
       if (quantity > hash[ticker].quantity) return setError("Selling too many");
 

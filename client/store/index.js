@@ -95,15 +95,30 @@ export const transactStock = stockObj => async dispatch => {
 
 export const getLiveStock = portfolio => async dispatch => {
   try {
-    const stockFullObj = {};
+    const portKeys = Object.keys(portfolio);
 
-    Object.keys(portfolio).forEach(stock => {
-      // const stockObj = stockPull(stock); // ACTUAL DATA FROM API HITS!
-      const stockObj = stockPullTest(stock); // DUMMY DATA FROM TEST FUNC!
-      stockFullObj[stock] = stockObj;
-    });
+    async function asyncForEach(arr, cb) {
+      for (let i = 0; i < arr.length; i++) {
+        await cb(arr[i]);
+      }
+    }
 
-    dispatch(setStock(stockFullObj));
+    if (portKeys.length) {
+      const stockFullObj = {};
+
+      const start = async () => {
+        await asyncForEach(portKeys, async stock => {
+          const stockObj = await stockPull(stock); // ACTUAL DATA FROM API HITS!
+          // const stockObj = stockPullTest(stock); // DUMMY DATA FROM TEST FUNC!
+
+          stockFullObj[stock] = stockObj;
+        });
+
+        dispatch(setStock(stockFullObj));
+      };
+
+      start();
+    } else dispatch(setStock({}));
   } catch (error) {
     console.error("Redux Error -", error);
   }

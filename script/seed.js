@@ -43,10 +43,10 @@ const stockSeed = [
     userId: 1
   },
   {
-    ticker: "AAPL",
-    name: "Apple Inc",
+    ticker: "BX",
+    name: "The Blackstone Group, Inc.",
     quantity: 8,
-    value: 282,
+    value: 55,
     action: "buy",
     date: Date(),
     userId: 2

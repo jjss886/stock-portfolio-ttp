@@ -2,7 +2,7 @@ import React from "react";
 
 const Stock = ({ stock }) => {
   const { ticker, name, quantity, curPrice, openPrice } = stock,
-    totalVal = quantity * curPrice,
+    totalVal = Math.round(quantity * curPrice),
     priceDelta = priceCompare(openPrice, curPrice),
     arrow = arrowSymbol[priceDelta];
 
