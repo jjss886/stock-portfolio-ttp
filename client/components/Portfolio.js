@@ -8,18 +8,46 @@ import BuyForm from "./BuyForm";
 import SellForm from "./SellForm";
 
 class Portfolio extends Component {
+  constructor() {
+    super();
+    this.state = {
+      key: ""
+    };
+  }
+
   componentDidMount() {
-    const { getPortfolio, user } = this.props;
+    const { getPortfolio, user, portfolio, getLiveStock } = this.props;
     if (user.id) getPortfolio(user.id);
+    if (portfolio.length) {
+      console.log("INSIDE MOUNTING!!");
+      getLiveStock(hashStock(portfolio));
+      this.stockTimer();
+    }
+  }
+
+  componentWillUnmount() {
+    console.log("UNMOUNTING!");
+    clearInterval(this.stockInterval);
   }
 
   componentDidUpdate(prevProps) {
     const { getPortfolio, user, portfolio, getLiveStock } = this.props;
     if (user.id && user.id !== prevProps.user.id) getPortfolio(user.id);
     if (portfolio.length && portfolio.length !== prevProps.portfolio.length) {
-      getLiveStock(hashStock(portfolio.slice()));
+      getLiveStock(hashStock(portfolio));
+      this.stockTimer();
     }
   }
+
+  stockTimer = () => {
+    this.stockInterval = setInterval(this.stockUpdate, 2000);
+  };
+
+  stockUpdate = () => {
+    const { portfolio, getLiveStock } = this.props;
+    console.log("hello?!");
+    getLiveStock(hashStock(portfolio));
+  };
 
   postList = port => {
     const hash = hashStock(port),
@@ -52,7 +80,7 @@ class Portfolio extends Component {
 
   render() {
     const { portfolio, user } = this.props,
-      [totalVal, adjPortfolio] = this.postList(portfolio.slice());
+      [totalVal, adjPortfolio] = this.postList(portfolio);
 
     return (
       <div className="portFullDiv">

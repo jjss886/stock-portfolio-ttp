@@ -1,7 +1,6 @@
 import React from "react";
 
 const TransactSum = ({ port }) => {
-  console.log("sum port -", port);
   const buyTotal = port =>
     port.reduce((acm, val) => {
       if (val.action === "buy") acm += val.value * val.quantity;
@@ -17,21 +16,21 @@ const TransactSum = ({ port }) => {
   return (
     <div className="tranSumFullDiv">
       <div className="tranInsideDiv">
-        <h2 className="tranHeader">Transaction Summary</h2>
+        <h1 className="tranHeader">Transaction Summary</h1>
 
         <div className="tranBSSum">
-          <h3 className="tranBuy">
-            Buy Total: $
+          <h2 className="tranBuy">
+            Total Buy: $
             {buyTotal(port)
               .toString()
               .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-          </h3>
-          <h3 className="tranSell">
-            Sell Total: $
+          </h2>
+          <h2 className="tranSell">
+            Total Sell: $
             {sellTotal(port)
               .toString()
               .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-          </h3>
+          </h2>
         </div>
       </div>
     </div>
