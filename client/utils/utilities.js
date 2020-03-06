@@ -1,6 +1,8 @@
 import axios from "axios";
 if (process.env.NODE_ENV !== "production") require("../../secrets");
 
+export const liveUpdateTime = 1000;
+
 export const dateCreate = () => {
   const date = new Date().toLocaleString("en-US", {
     timeZone: "America/New_York"
@@ -8,12 +10,14 @@ export const dateCreate = () => {
   return Date(date);
 };
 
+// API STOCK PULL FUNCTION
 export const stockPull = async ticker => {
   try {
     // PULL STOCK PRICE INFORMATION
     const { data: stockData } = await axios.get(
       `https://cloud.iexapis.com/stable/stock/${ticker}/quote?token=${process.env.iexAPIToken}`
     );
+
     console.log("API HIT ! -", stockData, new Date());
     return stockData;
   } catch (error) {
@@ -34,6 +38,7 @@ export const stockPullTest = ticker => {
       openingPrice: Math.floor(Math.random() * 30) + 5,
       closingPrice: Math.floor(Math.random() * 30) + 5
     };
+
     console.log("TEST API HIT ! -", stockData, new Date());
     return stockData;
   } catch (error) {

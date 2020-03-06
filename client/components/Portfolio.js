@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { hashStock } from "../utils/utilities";
+import { hashStock, liveUpdateTime } from "../utils/utilities";
 import { getPortfolio, getLiveStock, setError } from "../store";
 
 import StyleForm from "./StyleForm";
@@ -12,36 +12,49 @@ class Portfolio extends Component {
   constructor() {
     super();
     this.state = {
-      update: false
+      update: 0
     };
   }
 
   componentDidMount() {
-    const { getPortfolio, user, portfolio, getLiveStock } = this.props;
+    const { getPortfolio, user, portfolio, getLiveStock, style } = this.props;
+
     if (user.id) getPortfolio(user.id);
     if (portfolio.length) {
+      this.setState({ update: 1 });
       getLiveStock(hashStock(portfolio));
-      this.stockTimer();
+      if (style === "Last Price") this.stockTimer();
     }
   }
 
   componentWillUnmount() {
-    this.setState({ update: false });
-    clearInterval(this.stockInterval);
+    this.clearStockInterval();
   }
 
   componentDidUpdate(prevProps) {
-    const { getPortfolio, user, portfolio, getLiveStock, error } = this.props;
+    const {
+      getPortfolio,
+      user,
+      portfolio,
+      getLiveStock,
+      error,
+      style
+    } = this.props;
+
     if (user.id && user.id !== prevProps.user.id) getPortfolio(user.id);
-    if (portfolio.length && !this.state.update && !error) {
+    if (
+      portfolio.length &&
+      (!this.state.update || style !== prevProps.style) &&
+      !error
+    ) {
+      this.setState({ update: 1 });
       getLiveStock(hashStock(portfolio));
-      this.stockTimer();
+      if (style === "Last Price") this.stockTimer();
     }
   }
 
   stockTimer = () => {
-    this.setState({ update: 1 });
-    this.stockInterval = setInterval(this.stockUpdate, 3000);
+    this.stockInterval = setInterval(this.stockUpdate, liveUpdateTime);
   };
 
   stockUpdate = () => {
@@ -51,20 +64,25 @@ class Portfolio extends Component {
     if (update >= 1000) {
       clearInterval(this.stockInterval);
       setError("Are you still here?");
-      this.setState({ update: false });
+      this.setState({ update: 0 });
     } else {
       this.setState({ update: update + 1 });
       getLiveStock(hashStock(portfolio));
     }
   };
 
-  updateTimer = () => {
-    this.setState({ update: false });
+  updateTimerToZero = () => {
+    this.setState({ update: 0 });
+  };
+
+  clearStockInterval = () => {
+    this.setState({ update: 0 });
+    clearInterval(this.stockInterval);
   };
 
   postList = port => {
     const hash = hashStock(port),
-      { stocks } = this.props;
+      { stocks, style } = this.props;
     let totalVal = 0;
 
     if (Object.keys(stocks).length) {
@@ -92,7 +110,7 @@ class Portfolio extends Component {
 
     return (
       <div className="portFullDiv">
-        <StyleForm />
+        <StyleForm update={this.clearStockInterval} />
 
         <div className="allStockDiv">
           <h4 className="portValueHeader">
@@ -128,9 +146,9 @@ class Portfolio extends Component {
           </h4>
 
           <div className="portFormFullDiv">
-            <BuyForm update={this.updateTimer} />
+            <BuyForm update={this.updateTimerToZero} />
 
-            <SellForm update={this.updateTimer} />
+            <SellForm update={this.updateTimerToZero} />
           </div>
         </div>
       </div>
