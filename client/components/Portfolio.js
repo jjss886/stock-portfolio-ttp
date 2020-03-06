@@ -148,7 +148,9 @@ class Portfolio extends Component {
             Cash Balance: $
             <span className="moneyBalance">
               {user.cash
-                ? user.cash.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                ? Math.round(user.cash)
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                 : 0}
             </span>
           </h4>

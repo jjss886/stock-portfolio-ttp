@@ -22,7 +22,7 @@ const TransactSum = ({ port }) => {
           <h2 className="tranBuy">
             Total Bought: $
             <span className="moneyBalance">
-              {buyTotal(port)
+              {Math.round(buyTotal(port))
                 .toString()
                 .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
             </span>
@@ -31,7 +31,7 @@ const TransactSum = ({ port }) => {
           <h2 className="tranSell">
             Total Sold: $
             <span className="moneyBalance">
-              {sellTotal(port)
+              {Math.round(sellTotal(port))
                 .toString()
                 .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
             </span>

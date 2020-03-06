@@ -3,7 +3,7 @@ import React from "react";
 const SingleTransact = ({ stock }) => {
   const { ticker, name, quantity, value, date, action } = stock,
     text = action === "buy" ? "Bought" : "Sold",
-    totalCost = quantity * value,
+    totalCost = Math.round(quantity * value),
     dateObj = new Date(date);
 
   return (
@@ -18,18 +18,18 @@ const SingleTransact = ({ stock }) => {
 
       <div className="transTextDiv">
         <span className="singleTransSpan">
-          Quantity: <strong>{quantity}</strong>
+          Quantity: <span className="singTransBold">{quantity}</span>
         </span>
 
         <span className="singleTransSpan">
-          {text}: <strong>${value}</strong>
+          {text}: <span className="singTransBold">${Math.round(value)}</span>
         </span>
 
         <span className="singleTransSpan">
           Total Value:{" "}
-          <strong>
+          <span className="singTransBold">
             ${totalCost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-          </strong>
+          </span>
         </span>
       </div>
     </div>

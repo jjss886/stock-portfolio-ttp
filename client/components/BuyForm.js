@@ -46,6 +46,7 @@ class BuyForm extends Component {
       // const companyName = "apple",
       //   previousClose = 125,
       //   lastestPrice = 100;
+      console.log("BUY -", res);
       const { companyName, lastestPrice, previousClose } = res;
       const subjectPrice =
           style === "Last Closing" ? previousClose : lastestPrice,
@@ -63,6 +64,7 @@ class BuyForm extends Component {
         date: dateCreate()
       });
     } else setError("Not a valid ticker");
+    p;
 
     this.setState({ ticker: "", quantity: "" });
   };

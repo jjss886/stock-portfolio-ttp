@@ -9,7 +9,7 @@ const Stock = ({ stock }) => {
   return (
     <div className="stockFullDiv">
       <h4 className={`stockHeader stockColor${priceDelta}`}>
-        {name} ({ticker}){" "}
+        {name.length > 20 ? `${name.slice(0, 20)}...` : name} ({ticker}){" "}
         <span className="stockArrow">
           {priceDelta !== "Same" ? String.fromCharCode(arrow) : null}
         </span>
@@ -30,11 +30,11 @@ const Stock = ({ stock }) => {
 
       <div className="stockSpanDiv">
         <span className="stockSpan stockSpanOne">
-          Current Price: <strong>${curPrice}</strong>
+          Current Price: <strong>${Math.round(curPrice)}</strong>
         </span>
 
         <span className="stockSpan">
-          Open Price: <strong>${openPrice}</strong>
+          Open Price: <strong>${Math.round(openPrice)}</strong>
         </span>
       </div>
     </div>
