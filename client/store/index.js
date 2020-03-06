@@ -12,7 +12,8 @@ const initialState = {
   stocks: {},
   portfolio: [],
   error: false,
-  errorMsg: ""
+  errorMsg: "",
+  style: "closing"
 };
 
 // -------------- ACTION TYPES --------------
@@ -22,6 +23,7 @@ const SET_PORTFOLIO = "SET_PORTFOLIO";
 const STOCK_TRANSACT = "STOCK_TRANSACT";
 const SET_STOCK = "SET_STOCK";
 const SET_ERROR = "SET_ERROR";
+const SET_STYLE = "SET_STYLE";
 
 // -------------- ACTION CREATORS --------------
 export const getUser = user => ({ type: GET_USER, user });
@@ -34,6 +36,7 @@ export const addPortfolio = (portfolio, user) => ({
   user
 });
 export const setError = (errorMsg = "") => ({ type: SET_ERROR, errorMsg });
+export const setStyle = style => ({ type: SET_STYLE, style });
 
 // -------------- THUNKS --------------
 export const me = () => async dispatch => {
@@ -95,8 +98,8 @@ export const getLiveStock = portfolio => async dispatch => {
     const stockFullObj = {};
 
     Object.keys(portfolio).forEach(stock => {
-      // const stockObj = stockPull(stock); // REAL ONE!
-      const stockObj = stockPullTest(stock); // TESTING!
+      // const stockObj = stockPull(stock); // ACTUAL DATA FROM API HITS!
+      const stockObj = stockPullTest(stock); // DUMMY DATA FROM TEST FUNC!
       stockFullObj[stock] = stockObj;
     });
 
@@ -131,6 +134,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         error: action.errorMsg === "" ? false : true,
         errorMsg: action.errorMsg
+      };
+    case SET_STYLE:
+      return {
+        ...state,
+        style: action.style
       };
     default:
       return state;

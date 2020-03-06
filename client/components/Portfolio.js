@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { hashStock } from "../utils/utilities";
 import { getPortfolio, getLiveStock, setError } from "../store";
 
+import StyleForm from "./StyleForm";
 import Stock from "./Stock";
 import BuyForm from "./BuyForm";
 import SellForm from "./SellForm";
@@ -40,14 +41,14 @@ class Portfolio extends Component {
 
   stockTimer = () => {
     this.setState({ update: 1 });
-    this.stockInterval = setInterval(this.stockUpdate, 2000);
+    this.stockInterval = setInterval(this.stockUpdate, 3000);
   };
 
   stockUpdate = () => {
     const { portfolio, getLiveStock, setError } = this.props,
       { update } = this.state;
 
-    if (update >= 5) {
+    if (update >= 1000) {
       clearInterval(this.stockInterval);
       setError("Are you still here?");
       this.setState({ update: false });
@@ -91,6 +92,8 @@ class Portfolio extends Component {
 
     return (
       <div className="portFullDiv">
+        <StyleForm />
+
         <div className="allStockDiv">
           <h4 className="portValueHeader">
             {String.fromCharCode(9733)}&nbsp;&nbsp;&nbsp;
@@ -140,7 +143,8 @@ const mapState = state => {
     user: state.user,
     portfolio: state.portfolio,
     stocks: state.stocks,
-    error: state.error
+    error: state.error,
+    style: state.style
   };
 };
 

@@ -31,7 +31,8 @@ export const stockPullTest = ticker => {
       ticker,
       name: "Testing Ticker",
       latestPrice: Math.floor(Math.random() * 30) + 5,
-      openingPrice: Math.floor(Math.random() * 30) + 5
+      openingPrice: Math.floor(Math.random() * 30) + 5,
+      closingPrice: Math.floor(Math.random() * 30) + 5
     };
     console.log("TEST API HIT ! -", stockData, new Date());
     return stockData;
