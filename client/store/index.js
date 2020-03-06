@@ -129,7 +129,7 @@ const reducer = (state = initialState, action) => {
     case SET_ERROR:
       return {
         ...state,
-        error: !state.error,
+        error: action.errorMsg === "" ? false : true,
         errorMsg: action.errorMsg
       };
     default:
