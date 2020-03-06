@@ -40,7 +40,8 @@ h4 {
 
 .homeImg {
   width: 100vw;
-  object-fit: contain;
+  height: 70vh;
+  object-fit: cover;
 }
 
 /* -------------------- NAV BAR -------------------- */

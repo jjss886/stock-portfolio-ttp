@@ -32,7 +32,7 @@ router.post("/", async (req, res, next) => {
       await userProfile.update({
         cash: userProfile.cash - totalCost
       });
-    } else {
+    } else if (action === "sell") {
       await userProfile.update({
         cash: userProfile.cash + totalCost
       });
