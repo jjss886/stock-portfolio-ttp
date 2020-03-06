@@ -52,15 +52,11 @@ class SellForm extends Component {
     if (ticker === "--" || !quantity)
       return setError("Please fill out the whole form!");
 
-    const res = true;
-    // const res = await stockPull(this.state.ticker);
+    const res = { companyName: "apple", previousClose: 300, lastestPrice: 250 };
+    // const res = await stockPull(this.state.ticker); // HIT ACTUAL API
     if (res) {
-      const companyName = "apple",
-        previousClose = 300,
-        lastestPrice = 250;
-      // const { companyName, lastestPrice, previousClose } = res;
-      const subjectPrice =
-        style === "Last Closing" ? previousClose : lastestPrice;
+      const { companyName, lastestPrice, previousClose } = res,
+        subjectPrice = style === "Last Closing" ? previousClose : lastestPrice;
 
       if (quantity > hash[ticker].quantity) return setError("Selling too many");
 

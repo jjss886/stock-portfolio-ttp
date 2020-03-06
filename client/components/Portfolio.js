@@ -47,7 +47,9 @@ class Portfolio extends Component {
     if (user.id && user.id !== prevProps.user.id) getPortfolio(user.id);
     if (
       portfolio.length &&
-      (!this.state.update || style !== prevProps.style) &&
+      (!this.state.update ||
+        style !== prevProps.style ||
+        portfolio.length !== prevProps.portfolio.length) &&
       !error
     ) {
       this.setState({ update: 1 });

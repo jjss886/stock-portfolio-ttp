@@ -17,7 +17,7 @@ const userSeed = [
 const stockSeed = [
   {
     ticker: "AAPL",
-    name: "Apple Inc",
+    name: "Apple, Inc.",
     quantity: 10,
     value: 290,
     action: "buy",
@@ -26,7 +26,7 @@ const stockSeed = [
   },
   {
     ticker: "TSLA",
-    name: "Tesla Inc",
+    name: "Tesla, Inc.",
     quantity: 5,
     value: 720,
     action: "buy",
@@ -35,7 +35,7 @@ const stockSeed = [
   },
   {
     ticker: "AAPL",
-    name: "Apple Inc",
+    name: "Apple, Inc.",
     quantity: 2,
     value: 285,
     action: "buy",

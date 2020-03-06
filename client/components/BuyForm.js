@@ -40,19 +40,14 @@ class BuyForm extends Component {
     if (!ticker || !quantity)
       return setError("Please fill out the whole form!");
 
-    // const res = true;
-    const res = await stockPull(this.state.ticker);
+    const res = { companyName: "apple", previousClose: 125, lastestPrice: 100 };
+    // const res = await stockPull(this.state.ticker); // HIT ACTUAL API
     if (res) {
-      // const companyName = "apple",
-      //   previousClose = 125,
-      //   lastestPrice = 100;
-      console.log("BUY -", res);
-      const { companyName, lastestPrice, previousClose } = res;
-      const subjectPrice =
-          style === "Last Closing" ? previousClose : lastestPrice,
+      const { companyName, lastestPrice, previousClose } = res,
+        subjectPrice = style === "Last Closing" ? previousClose : lastestPrice,
         totalCost = subjectPrice * quantity;
 
-      if (totalCost > user.cash) return setError("Not Enough Cash");
+      if (totalCost > user.cash) return setError("Not enough cash");
 
       transactStock({
         userId: user.id,
@@ -64,7 +59,6 @@ class BuyForm extends Component {
         date: dateCreate()
       });
     } else setError("Not a valid ticker");
-    p;
 
     this.setState({ ticker: "", quantity: "" });
   };

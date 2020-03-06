@@ -108,8 +108,8 @@ export const getLiveStock = portfolio => async dispatch => {
 
       const start = async () => {
         await asyncForEach(portKeys, async stock => {
-          const stockObj = await stockPull(stock); // ACTUAL DATA FROM API HITS!
-          // const stockObj = stockPullTest(stock); // DUMMY DATA FROM TEST FUNC!
+          // const stockObj = await stockPull(stock); // ACTUAL DATA FROM API HITS!
+          const stockObj = stockPullTest(stock); // DUMMY DATA FROM TEST FUNC!
 
           stockFullObj[stock] = stockObj;
         });
