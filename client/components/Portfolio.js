@@ -19,14 +19,12 @@ class Portfolio extends Component {
     const { getPortfolio, user, portfolio, getLiveStock } = this.props;
     if (user.id) getPortfolio(user.id);
     if (portfolio.length) {
-      console.log("INSIDE MOUNTING!!");
       getLiveStock(hashStock(portfolio));
       this.stockTimer();
     }
   }
 
   componentWillUnmount() {
-    console.log("UNMOUNTING!");
     clearInterval(this.stockInterval);
   }
 
@@ -45,7 +43,6 @@ class Portfolio extends Component {
 
   stockUpdate = () => {
     const { portfolio, getLiveStock } = this.props;
-    console.log("hello?!");
     getLiveStock(hashStock(portfolio));
   };
 
@@ -86,7 +83,7 @@ class Portfolio extends Component {
       <div className="portFullDiv">
         <div className="allStockDiv">
           <h4 className="portValueHeader">
-            Portfolio Value: $
+            {user.name}'s Portfolio: $
             {totalVal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
           </h4>
 
