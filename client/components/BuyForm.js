@@ -40,13 +40,16 @@ class BuyForm extends Component {
     if (!ticker || !quantity)
       return setError("Please fill out the whole form!");
 
-    let res = true;
+    const res = true;
     // const res = await stockPull(this.state.ticker);
     if (res) {
-      // const { companyName, lastestPrice } = res,
+      // const { companyName, lastestPrice, closingPrice } = res,
       const companyName = "apple",
-        lastestPrice = 120,
-        totalCost = lastestPrice * quantity;
+        closingPrice = 125,
+        lastestPrice = 100;
+      const subjectPrice =
+          style === "Last Closing" ? closingPrice : lastestPrice,
+        totalCost = subjectPrice * quantity;
 
       if (totalCost > user.cash) return setError("Not Enough Cash");
 
@@ -55,7 +58,7 @@ class BuyForm extends Component {
         ticker,
         name: companyName,
         quantity,
-        value: lastestPrice,
+        value: subjectPrice,
         action: "buy",
         date: dateCreate()
       });
