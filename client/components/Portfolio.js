@@ -57,6 +57,10 @@ class Portfolio extends Component {
     }
   };
 
+  updateTimer = () => {
+    this.setState({ update: false });
+  };
+
   postList = port => {
     const hash = hashStock(port),
       { stocks } = this.props;
@@ -121,9 +125,9 @@ class Portfolio extends Component {
           </h4>
 
           <div className="portFormFullDiv">
-            <BuyForm />
+            <BuyForm update={this.updateTimer} />
 
-            <SellForm />
+            <SellForm update={this.updateTimer} />
           </div>
         </div>
       </div>
