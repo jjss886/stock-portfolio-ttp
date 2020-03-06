@@ -10,7 +10,7 @@ const SingleTransact = ({ stock }) => {
     <div className="singleTransactFullDiv">
       <div className="transTextDiv">
         <h4 className="singleTransHeader">
-          {name.length > 12 ? `${name.slice(0, 12)}...` : name} ({ticker})
+          {name.length > 15 ? `${name.slice(0, 15)}...` : name} ({ticker})
         </h4>
 
         <h4 className="singleTransHeader">{dateObj.toDateString()}</h4>

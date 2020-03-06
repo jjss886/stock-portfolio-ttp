@@ -52,7 +52,7 @@ class SellForm extends Component {
     if (ticker === "--" || !quantity)
       return setError("Please fill out the whole form!");
 
-    const res = { companyName: "apple", previousClose: 300, lastestPrice: 250 };
+    const res = { companyName: "Test", previousClose: 300, lastestPrice: 250 };
     // const res = await stockPull(this.state.ticker); // HIT ACTUAL API
     if (res) {
       const { companyName, lastestPrice, previousClose } = res,

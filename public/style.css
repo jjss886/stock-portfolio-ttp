@@ -218,14 +218,14 @@ h4 {
   display: flex;
   justify-content: space-evenly;
   margin-top: 20px;
-  width: 90vw;
+  width: 95%;
 }
 
 .portActionDiv {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 600px;
+  width: 500px;
 }
 
 .allStockDiv {
@@ -249,7 +249,7 @@ h4 {
 
 .portFormFullDiv {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   width: 100%;
 }
 
@@ -429,7 +429,7 @@ h4 {
   align-items: center;
   border-radius: 5px;
   padding: 15px;
-  width: 40%;
+  width: 42%;
   height: 250px;
   border-style: solid;
   border-color: black;

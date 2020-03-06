@@ -1,7 +1,7 @@
 import axios from "axios";
 if (process.env.NODE_ENV !== "production") require("../../secrets");
 
-export const refreshTime = 15000;
+export const refreshTime = 3000;
 export const updateCap = 10;
 
 export const dateCreate = () => {
@@ -33,7 +33,7 @@ export const stockPullTest = ticker => {
     // CREATE DUMMY STOCK PRICE INFORMATION
     const stockData = {
       ticker,
-      companyName: "Testing Ticker",
+      companyName: "Test",
       latestPrice: Math.floor(Math.random() * 30) + 5,
       openingPrice: Math.floor(Math.random() * 30) + 5,
       previousClose: Math.floor(Math.random() * 30) + 5

@@ -40,7 +40,7 @@ class BuyForm extends Component {
     if (!ticker || !quantity)
       return setError("Please fill out the whole form!");
 
-    const res = { companyName: "apple", previousClose: 125, lastestPrice: 100 };
+    const res = { companyName: "Test", previousClose: 125, lastestPrice: 100 };
     // const res = await stockPull(this.state.ticker); // HIT ACTUAL API
     if (res) {
       const { companyName, lastestPrice, previousClose } = res,
