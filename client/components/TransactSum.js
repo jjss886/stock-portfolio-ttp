@@ -20,16 +20,21 @@ const TransactSum = ({ port }) => {
 
         <div className="tranBSSum">
           <h2 className="tranBuy">
-            Total Buy: $
-            {buyTotal(port)
-              .toString()
-              .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+            Total Bought: $
+            <span className="moneyBalance">
+              {buyTotal(port)
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+            </span>
           </h2>
+
           <h2 className="tranSell">
-            Total Sell: $
-            {sellTotal(port)
-              .toString()
-              .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+            Total Sold: $
+            <span className="moneyBalance">
+              {sellTotal(port)
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+            </span>
           </h2>
         </div>
       </div>

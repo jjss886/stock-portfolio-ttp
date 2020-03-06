@@ -89,16 +89,26 @@ h4 {
 .appFullDiv {
   background-color: rgba(209, 209, 183, 1);
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
 }
 
 .appInsideDiv {
   position: relative;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   width: 100vw;
-  height: 100vh;
   padding-top: 65px;
+}
+
+.sigText {
+  text-align: right;
+  margin: 20px 40px 30px 0;
+  font-style: italic;
+  font-weight: 800;
 }
 
 /* -------------------- SIGN IN PAGE -------------------- */
@@ -233,6 +243,10 @@ h4 {
   font-size: 25px;
 }
 
+.moneyBalance {
+  text-decoration: underline;
+}
+
 .portFormFullDiv {
   display: flex;
   justify-content: space-evenly;
@@ -253,7 +267,7 @@ h4 {
   border-color: black;
   border-width: 2px;
   min-height: 250px;
-  width: 300px;
+  width: 350px;
   border-radius: 5px;
   padding: 15px;
 }
@@ -322,8 +336,10 @@ h4 {
 }
 
 .tranHeader {
+  font-size: 40px;
   text-align: center;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+  color: darkgreen;
 }
 
 .tranBSSum {
@@ -359,8 +375,8 @@ h4 {
 
 .transactHeader {
   text-align: center;
-  margin-bottom: 15px;
-  font-size: 22px;
+  margin-bottom: 5px;
+  font-size: 26px;
 }
 
 /* -------------------- SINGLE TRANSCTION -------------------- */
@@ -428,12 +444,12 @@ h4 {
 
 /* -------------------- BUY FORM -------------------- */
 .buyFormFullDiv {
-  background-color: aqua;
+  background-color: rgb(24, 156, 233);
 }
 
 /* -------------------- SELL FORM -------------------- */
 .sellFormFullDiv {
-  background-color: coral;
+  background-color: rgb(137, 101, 235);
 }
 
 .sellFormSelect {

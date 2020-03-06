@@ -38,8 +38,9 @@ class Transaction extends Component {
         <div className="transBuySellDiv">
           {portfolio.length ? (
             <div className="transactOuterDiv">
+              <h3 className="transactHeader">Buy</h3>
+
               <div className="buyTransactDiv transactDiv">
-                <h3 className="transactHeader">Buy</h3>
                 {buy
                   .slice()
                   .reverse()
@@ -52,8 +53,9 @@ class Transaction extends Component {
 
           {portfolio.length ? (
             <div className="transactOuterDiv">
+              <h3 className="transactHeader">Sell</h3>
+
               <div className="sellTransactDiv transactDiv">
-                <h3 className="transactHeader">Sell</h3>
                 {sell
                   .slice()
                   .reverse()

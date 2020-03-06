@@ -22,6 +22,8 @@ class App extends Component {
         <div className="appInsideDiv">
           <Routes />
         </div>
+
+        <span className="sigText">By James Shen</span>
       </div>
     );
   }

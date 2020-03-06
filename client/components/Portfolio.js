@@ -71,9 +71,10 @@ class Portfolio extends Component {
 
     return [
       totalVal,
-      Object.values(hash).sort(
-        (a, b) => b.quantity * b.curPrice - a.quantity * a.curPrice
-      )
+      Object.values(hash)
+      // Object.values(hash).sort(
+      //   (a, b) => b.quantity * b.curPrice - a.quantity * a.curPrice
+      // )
     ];
   };
 
@@ -85,8 +86,14 @@ class Portfolio extends Component {
       <div className="portFullDiv">
         <div className="allStockDiv">
           <h4 className="portValueHeader">
+            {String.fromCharCode(9733)}&nbsp;&nbsp;&nbsp;
             {user.name ? `${user.name.split(" ")[0]}'s` : "Loading"} Portfolio:
-            ${totalVal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+            $
+            <span className="moneyBalance">
+              {totalVal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+            </span>
+            &nbsp;&nbsp;&nbsp;
+            {String.fromCharCode(9733)}
           </h4>
 
           <div className="portStockDiv">
@@ -103,9 +110,11 @@ class Portfolio extends Component {
         <div className="portActionDiv">
           <h4 className="cashHeader">
             Cash Balance: $
-            {user.cash
-              ? user.cash.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-              : 0}
+            <span className="moneyBalance">
+              {user.cash
+                ? user.cash.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                : 0}
+            </span>
           </h4>
 
           <div className="portFormFullDiv">

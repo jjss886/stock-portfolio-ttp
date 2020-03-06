@@ -21,7 +21,7 @@ const Stock = ({ stock }) => {
       </span>
 
       <span className="stockSpan">
-        Value: ${curPrice} Open: ${openPrice}
+        Current Price: ${curPrice} Open Price: ${openPrice}
       </span>
     </div>
   );
