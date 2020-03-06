@@ -1,9 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { auth } from "../store";
+import { auth, removeUser } from "../store";
 
 class AuthForm extends Component {
+  componentDidMount() {
+    this.props.removeUser();
+  }
+
   componentDidUpdate() {
     const { user, history } = this.props;
     if (user.id) history.push("/");
@@ -37,6 +41,7 @@ class AuthForm extends Component {
               <label htmlFor="email" className="authFormLabel">
                 Email:
               </label>
+
               <input name="email" type="email" className="authInputBox" />
             </div>
 
@@ -45,15 +50,14 @@ class AuthForm extends Component {
                 <label htmlFor="userName" className="authFormLabel">
                   Name:
                 </label>
+
                 <input
                   name="userName"
                   type="userName"
                   className="authInputBox"
                 />
               </div>
-            ) : (
-              ""
-            )}
+            ) : null}
 
             <div className="authInputDiv">
               <label htmlFor="password" className="authFormLabel">
@@ -63,7 +67,9 @@ class AuthForm extends Component {
             </div>
 
             {error && error.response && (
-              <span className="authErrorMessage"> {error.response.data} </span>
+              <span className="authErrorMessage">
+                {error.response.data.split("Validation error: ")}
+              </span>
             )}
           </div>
 
@@ -98,7 +104,8 @@ const mapSignup = state => {
 
 const mapDispatch = dispatch => {
   return {
-    auth: userObj => dispatch(auth(userObj))
+    auth: userObj => dispatch(auth(userObj)),
+    removeUser: () => dispatch(removeUser())
   };
 };
 
