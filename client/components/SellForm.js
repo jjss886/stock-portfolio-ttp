@@ -13,12 +13,19 @@ class SellForm extends Component {
   }
 
   handleTickerChange = evt => {
+    // STILL ACTIVE SO RESET STALL TIMER FOR PARENT COMPONENT
+    this.props.updateTimer();
+
     this.setState({ ticker: evt.target.value });
   };
 
   handleChange = evt => {
     const { name, value } = evt.target,
-      { setError } = this.props;
+      { setError, updateTimer } = this.props;
+
+    // STILL ACTIVE SO RESET STALL TIMER FOR PARENT COMPONENT
+    updateTimer();
+
     if (isNaN(value)) return setError("Only include numbers");
 
     this.setState({
@@ -29,12 +36,22 @@ class SellForm extends Component {
   sell = evt => {
     evt.preventDefault();
     const { ticker, quantity } = this.state,
-      { user, transactStock, portfolio, setError } = this.props,
+      {
+        user,
+        transactStock,
+        portfolio,
+        setError,
+        style,
+        updateTimer
+      } = this.props,
       hash = hashStock(portfolio);
+
+    // STILL ACTIVE SO RESET STALL TIMER FOR PARENT COMPONENT
+    updateTimer();
+
     if (ticker === "--" || !quantity)
       return setError("Please fill out the whole form!");
 
-    // !! STILL NEED TO COMPLETE SELLING FUNCTION!
     let res = true;
     // const res = await stockPull(this.state.ticker);
     if (res) {
@@ -42,18 +59,17 @@ class SellForm extends Component {
       const companyName = "apple",
         lastestPrice = 290;
 
-      if (quantity > hash[ticker].quantity) setError("Selling too many");
-      else {
-        transactStock({
-          userId: user.id,
-          ticker,
-          name: companyName,
-          quantity,
-          value: lastestPrice,
-          action: "sell",
-          date: dateCreate()
-        });
-      }
+      if (quantity > hash[ticker].quantity) return setError("Selling too many");
+
+      transactStock({
+        userId: user.id,
+        ticker,
+        name: companyName,
+        quantity,
+        value: lastestPrice,
+        action: "sell",
+        date: dateCreate()
+      });
     } else setError("Not a valid ticker");
 
     this.setState({ ticker: "--", quantity: "" });
@@ -112,7 +128,8 @@ class SellForm extends Component {
 const mapState = state => {
   return {
     user: state.user,
-    portfolio: state.portfolio
+    portfolio: state.portfolio,
+    style: state.style
   };
 };
 

@@ -1,7 +1,7 @@
 import axios from "axios";
 if (process.env.NODE_ENV !== "production") require("../../secrets");
 
-export const liveUpdateTime = 1000;
+export const refreshTime = 1000;
 
 export const dateCreate = () => {
   const date = new Date().toLocaleString("en-US", {
@@ -21,7 +21,6 @@ export const stockPull = async ticker => {
     console.log("API HIT ! -", stockData, new Date());
     return stockData;
   } catch (error) {
-    // SEND BACK ERROR
     console.error("Stock Error -", error);
     return false;
   }
@@ -30,7 +29,7 @@ export const stockPull = async ticker => {
 // DUMMY STOCK PULL FUNCTION TO AVOID HITTING API DURING TESTING
 export const stockPullTest = ticker => {
   try {
-    // PULL STOCK PRICE INFORMATION
+    // CREATE DUMMY STOCK PRICE INFORMATION
     const stockData = {
       ticker,
       name: "Testing Ticker",
@@ -39,10 +38,9 @@ export const stockPullTest = ticker => {
       closingPrice: Math.floor(Math.random() * 30) + 5
     };
 
-    console.log("TEST API HIT ! -", stockData, new Date());
+    // console.log("TEST API HIT ! -", stockData, new Date());
     return stockData;
   } catch (error) {
-    // SEND BACK ERROR
     console.error("Stock Error -", error);
     return false;
   }

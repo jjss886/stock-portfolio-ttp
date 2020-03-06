@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { hashStock, liveUpdateTime } from "../utils/utilities";
+import { hashStock, refreshTime } from "../utils/utilities";
 import { getPortfolio, getLiveStock, setError } from "../store";
 
 import StyleForm from "./StyleForm";
@@ -19,7 +19,10 @@ class Portfolio extends Component {
   componentDidMount() {
     const { getPortfolio, user, portfolio, getLiveStock, style } = this.props;
 
+    // SET PORTFOLIO ONTO STATE
     if (user.id) getPortfolio(user.id);
+
+    // SET STOCK VALUES ONTO STATE
     if (portfolio.length) {
       this.setState({ update: 1 });
       getLiveStock(hashStock(portfolio));
@@ -54,14 +57,14 @@ class Portfolio extends Component {
   }
 
   stockTimer = () => {
-    this.stockInterval = setInterval(this.stockUpdate, liveUpdateTime);
+    this.stockInterval = setInterval(this.stockUpdate, refreshTime);
   };
 
   stockUpdate = () => {
     const { portfolio, getLiveStock, setError } = this.props,
       { update } = this.state;
 
-    if (update >= 1000) {
+    if (update >= 10) {
       clearInterval(this.stockInterval);
       setError("Are you still here?");
       this.setState({ update: 0 });
@@ -72,7 +75,7 @@ class Portfolio extends Component {
   };
 
   updateTimerToZero = () => {
-    this.setState({ update: 0 });
+    this.setState({ update: 1 });
   };
 
   clearStockInterval = () => {
@@ -92,8 +95,13 @@ class Portfolio extends Component {
           stocks[key] = {};
           stocks[key].latestPrice = 0;
           stocks[key].openingPrice = 0;
+          stocks[key].closingPrice = 0;
         }
-        hash[key].curPrice = stocks[key].latestPrice;
+
+        hash[key].curPrice =
+          style === "Last Price"
+            ? stocks[key].latestPrice
+            : stocks[key].closingPrice;
         hash[key].openPrice = stocks[key].openingPrice;
 
         // ACCUMULATING TOTAL PORTFOLIO VALUE
@@ -146,9 +154,9 @@ class Portfolio extends Component {
           </h4>
 
           <div className="portFormFullDiv">
-            <BuyForm update={this.updateTimerToZero} />
+            <BuyForm updateTimer={this.updateTimerToZero} />
 
-            <SellForm update={this.updateTimerToZero} />
+            <SellForm updateTimer={this.updateTimerToZero} />
           </div>
         </div>
       </div>

@@ -13,8 +13,12 @@ class BuyForm extends Component {
   }
 
   handleChange = evt => {
-    const { setError } = this.props;
+    const { setError, updateTimer } = this.props;
     let { name, value } = evt.target;
+
+    // STILL ACTIVE SO RESET STALL TIMER FOR PARENT COMPONENT
+    updateTimer();
+
     if (name === "quantity") {
       if (isNaN(value)) return setError("Only include numbers");
       else value = Number(value);
@@ -28,7 +32,11 @@ class BuyForm extends Component {
   buy = async evt => {
     evt.preventDefault();
     const { ticker, quantity } = this.state,
-      { user, transactStock, setError } = this.props;
+      { user, transactStock, setError, updateTimer, style } = this.props;
+
+    // STILL ACTIVE SO RESET STALL TIMER FOR PARENT COMPONENT
+    updateTimer();
+
     if (!ticker || !quantity)
       return setError("Please fill out the whole form!");
 
@@ -39,7 +47,9 @@ class BuyForm extends Component {
       const companyName = "apple",
         lastestPrice = 120,
         totalCost = lastestPrice * quantity;
+
       if (totalCost > user.cash) return setError("Not Enough Cash");
+
       transactStock({
         userId: user.id,
         ticker,
@@ -101,7 +111,8 @@ class BuyForm extends Component {
 
 const mapState = state => {
   return {
-    user: state.user
+    user: state.user,
+    style: state.style
   };
 };
 
