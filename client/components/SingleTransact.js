@@ -17,15 +17,19 @@ const SingleTransact = ({ stock }) => {
       </div>
 
       <div className="transTextDiv">
-        <span className="singleTransSpan">Quantity: {quantity}</span>
-
         <span className="singleTransSpan">
-          {text}: ${value}
+          Quantity: <strong>{quantity}</strong>
         </span>
 
         <span className="singleTransSpan">
-          Total Value: $
-          {totalCost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+          {text}: <strong>${value}</strong>
+        </span>
+
+        <span className="singleTransSpan">
+          Total Value:{" "}
+          <strong>
+            ${totalCost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+          </strong>
         </span>
       </div>
     </div>

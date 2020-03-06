@@ -16,37 +16,37 @@ const userSeed = [
 
 const stockSeed = [
   {
-    ticker: "aaa",
-    name: "A STOCK",
+    ticker: "aapl",
+    name: "Apple Inc",
     quantity: 10,
-    value: 12,
+    value: 290,
     action: "buy",
     date: Date(),
     userId: 1
   },
   {
-    ticker: "bbb",
-    name: "B STOCK",
-    quantity: 3,
-    value: 6,
-    action: "buy",
-    date: Date(),
-    userId: 1
-  },
-  {
-    ticker: "aaa",
-    name: "A STOCK",
-    quantity: 6,
-    value: 25,
-    action: "buy",
-    date: Date(),
-    userId: 1
-  },
-  {
-    ticker: "aaa",
-    name: "A STOCK",
+    ticker: "tsla",
+    name: "Tesla Inc",
     quantity: 5,
-    value: 12,
+    value: 720,
+    action: "buy",
+    date: Date(),
+    userId: 1
+  },
+  {
+    ticker: "aapl",
+    name: "Apple Inc",
+    quantity: 2,
+    value: 285,
+    action: "buy",
+    date: Date(),
+    userId: 1
+  },
+  {
+    ticker: "aapl",
+    name: "Apple Inc",
+    quantity: 8,
+    value: 282,
     action: "buy",
     date: Date(),
     userId: 2

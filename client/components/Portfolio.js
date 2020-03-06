@@ -69,13 +69,7 @@ class Portfolio extends Component {
       });
     }
 
-    return [
-      totalVal,
-      Object.values(hash)
-      // Object.values(hash).sort(
-      //   (a, b) => b.quantity * b.curPrice - a.quantity * a.curPrice
-      // )
-    ];
+    return [totalVal, Object.values(hash)];
   };
 
   render() {
