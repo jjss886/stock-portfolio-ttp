@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { hashStock } from "../utils/utilities";
-import { getPortfolio, getLiveStock } from "../store";
+import { getPortfolio } from "../store";
+import TransactSum from "./TransactSum";
 import SingleTransact from "./SingleTransact";
 
 class Transaction extends Component {
@@ -11,11 +11,8 @@ class Transaction extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { getPortfolio, user, portfolio, getLiveStock } = this.props;
+    const { getPortfolio, user } = this.props;
     if (user.id && user.id !== prevProps.user.id) getPortfolio(user.id);
-    if (portfolio.length && portfolio.length !== prevProps.portfolio.length) {
-      getLiveStock(hashStock(portfolio.slice()));
-    }
   }
 
   splitBuySell = portfolio => {
@@ -36,33 +33,37 @@ class Transaction extends Component {
 
     return (
       <div className="transactFullDiv">
-        {portfolio.length ? (
-          <div className="transactOuterDiv">
-            <div className="buyTransactDiv transactDiv">
-              <h3 className="transactHeader">Buy</h3>
-              {buy
-                .slice()
-                .reverse()
-                .map((stock, idx) => (
-                  <SingleTransact key={idx} stock={stock} />
-                ))}
-            </div>
-          </div>
-        ) : null}
+        <TransactSum port={portfolio} />
 
-        {portfolio.length ? (
-          <div className="transactOuterDiv">
-            <div className="sellTransactDiv transactDiv">
-              <h3 className="transactHeader">Sell</h3>
-              {sell
-                .slice()
-                .reverse()
-                .map((stock, idx) => (
-                  <SingleTransact key={idx} stock={stock} />
-                ))}
+        <div className="transBuySellDiv">
+          {portfolio.length ? (
+            <div className="transactOuterDiv">
+              <div className="buyTransactDiv transactDiv">
+                <h3 className="transactHeader">Buy</h3>
+                {buy
+                  .slice()
+                  .reverse()
+                  .map((stock, idx) => (
+                    <SingleTransact key={idx} stock={stock} />
+                  ))}
+              </div>
             </div>
-          </div>
-        ) : null}
+          ) : null}
+
+          {portfolio.length ? (
+            <div className="transactOuterDiv">
+              <div className="sellTransactDiv transactDiv">
+                <h3 className="transactHeader">Sell</h3>
+                {sell
+                  .slice()
+                  .reverse()
+                  .map((stock, idx) => (
+                    <SingleTransact key={idx} stock={stock} />
+                  ))}
+              </div>
+            </div>
+          ) : null}
+        </div>
       </div>
     );
   }
@@ -77,8 +78,7 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    getPortfolio: userId => dispatch(getPortfolio(userId)),
-    getLiveStock: portfolio => dispatch(getLiveStock(portfolio))
+    getPortfolio: userId => dispatch(getPortfolio(userId))
   };
 };
 

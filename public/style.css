@@ -296,9 +296,43 @@ h4 {
 /* -------------------- TRANSCTION -------------------- */
 .transactFullDiv {
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: column;
   width: 75vw;
   margin-top: 20px;
+}
+
+.tranSumFullDiv {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.tranInsideDiv {
+  display: flex;
+  flex-direction: column;
+  background-color: lightgray;
+  width: 850px;
+  min-height: 100px;
+  padding: 15px;
+  border-radius: 5px;
+  border-style: solid;
+  border-color: black;
+  border-width: 2px;
+}
+
+.tranHeader {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.tranBSSum {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.transBuySellDiv {
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .transactDiv {
