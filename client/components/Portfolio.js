@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { hashStock } from "../utils/utilities";
-import { getPortfolio, getLiveStock } from "../store";
+import { getPortfolio, getLiveStock, setError } from "../store";
 
 import Stock from "./Stock";
 import BuyForm from "./BuyForm";
@@ -30,22 +30,31 @@ class Portfolio extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { getPortfolio, user, portfolio, getLiveStock } = this.props;
+    const { getPortfolio, user, portfolio, getLiveStock, error } = this.props;
     if (user.id && user.id !== prevProps.user.id) getPortfolio(user.id);
-    if (portfolio.length && !this.state.update) {
+    if (portfolio.length && !this.state.update && !error) {
       getLiveStock(hashStock(portfolio));
       this.stockTimer();
     }
   }
 
   stockTimer = () => {
-    this.setState({ update: true });
+    this.setState({ update: 1 });
     this.stockInterval = setInterval(this.stockUpdate, 2000);
   };
 
   stockUpdate = () => {
-    const { portfolio, getLiveStock } = this.props;
-    getLiveStock(hashStock(portfolio));
+    const { portfolio, getLiveStock, setError } = this.props,
+      { update } = this.state;
+
+    if (update >= 5) {
+      clearInterval(this.stockInterval);
+      setError("Are you still here?");
+      this.setState({ update: false });
+    } else {
+      this.setState({ update: update + 1 });
+      getLiveStock(hashStock(portfolio));
+    }
   };
 
   postList = port => {
@@ -126,14 +135,16 @@ const mapState = state => {
   return {
     user: state.user,
     portfolio: state.portfolio,
-    stocks: state.stocks
+    stocks: state.stocks,
+    error: state.error
   };
 };
 
 const mapDispatch = dispatch => {
   return {
     getPortfolio: userId => dispatch(getPortfolio(userId)),
-    getLiveStock: portfolio => dispatch(getLiveStock(portfolio))
+    getLiveStock: portfolio => dispatch(getLiveStock(portfolio)),
+    setError: msg => dispatch(setError(msg))
   };
 };
 

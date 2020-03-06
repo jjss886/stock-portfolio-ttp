@@ -14,7 +14,7 @@ export const stockPull = async ticker => {
     const { data: stockData } = await axios.get(
       `https://cloud.iexapis.com/stable/stock/${ticker}/quote?token=${process.env.iexAPIToken}`
     );
-    console.log("API HIT ! -", stockData);
+    console.log("API HIT ! -", stockData, new Date());
     return stockData;
   } catch (error) {
     // SEND BACK ERROR
@@ -33,7 +33,7 @@ export const stockPullTest = ticker => {
       latestPrice: Math.floor(Math.random() * 30) + 5,
       openingPrice: Math.floor(Math.random() * 30) + 5
     };
-    console.log("TEST API HIT ! -", stockData);
+    console.log("TEST API HIT ! -", stockData, new Date());
     return stockData;
   } catch (error) {
     // SEND BACK ERROR
