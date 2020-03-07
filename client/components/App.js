@@ -23,7 +23,7 @@ class App extends Component {
           <Routes />
         </div>
 
-        <span className="sigText">By James Shen</span>
+        <span className="sigText">{String.fromCharCode(169)} James Shen</span>
       </div>
     );
   }
