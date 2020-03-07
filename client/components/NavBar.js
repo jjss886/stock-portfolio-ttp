@@ -24,7 +24,7 @@ class NavBar extends Component {
             activeClassName="selectedNavLink"
             exact
           >
-            HomePage
+            Home Page
           </NavLink>
 
           {userId ? (
