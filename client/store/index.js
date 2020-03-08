@@ -4,7 +4,7 @@ import thunkMiddleware from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import axios from "axios";
 import history from "../utils/history";
-import { stockPull, stockPullTest } from "../utils/utilities";
+import { stockMasterPull } from "../utils/utilities";
 
 // -------------- INITIAL STATE --------------
 const initialState = {
@@ -108,8 +108,7 @@ export const getLiveStock = portfolio => async dispatch => {
 
       const start = async () => {
         await asyncForEach(portKeys, async stock => {
-          // const stockObj = await stockPull(stock); // ACTUAL DATA FROM API HITS!
-          const stockObj = stockPullTest(stock); // DUMMY DATA FROM TEST FUNC!
+          const stockObj = await stockMasterPull(stock);
 
           stockFullObj[stock] = stockObj;
         });

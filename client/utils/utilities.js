@@ -3,6 +3,7 @@ if (process.env.NODE_ENV !== "production") require("../../secrets");
 
 export const refreshTime = 3000;
 export const updateCap = 10;
+export const apiHitMaster = false;
 
 export const dateCreate = () => {
   const date = new Date().toLocaleString("en-US", {
@@ -11,8 +12,13 @@ export const dateCreate = () => {
   return Date(date);
 };
 
+export const stockMasterPull = async ticker => {
+  if (apiHitMaster) return await stockPullAPI(sticker);
+  else return stockPullTest(ticker);
+};
+
 // API STOCK PULL FUNCTION
-export const stockPull = async ticker => {
+export const stockPullAPI = async ticker => {
   try {
     // PULL ACTUAL STOCK PRICE INFORMATION
     const { data: stockData } = await axios.get(
@@ -34,12 +40,12 @@ export const stockPullTest = ticker => {
     const stockData = {
       ticker,
       companyName: "Test",
-      latestPrice: Math.floor(Math.random() * 30) + 5,
-      openingPrice: Math.floor(Math.random() * 30) + 5,
-      previousClose: Math.floor(Math.random() * 30) + 5
+      latestPrice: Math.floor(Math.random() * 75) + 5,
+      openingPrice: Math.floor(Math.random() * 75) + 5,
+      previousClose: Math.floor(Math.random() * 75) + 5
     };
 
-    // console.log("TEST STOCK HIT ! -", stockData, new Date());
+    console.log("TEST STOCK HIT ! -", stockData, new Date());
     return stockData;
   } catch (error) {
     console.error("Stock Error -", error);

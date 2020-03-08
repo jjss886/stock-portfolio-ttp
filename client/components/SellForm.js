@@ -42,6 +42,7 @@ class SellForm extends Component {
         portfolio,
         setError,
         style,
+        stocks,
         updateTimer
       } = this.props,
       hash = hashStock(portfolio);
@@ -52,24 +53,20 @@ class SellForm extends Component {
     if (ticker === "--" || !quantity)
       return setError("Please fill out the whole form!");
 
-    const res = { companyName: "Test", previousClose: 300, lastestPrice: 250 };
-    // const res = await stockPull(this.state.ticker); // HIT ACTUAL API
-    if (res) {
-      const { companyName, lastestPrice, previousClose } = res,
-        subjectPrice = style === "Last Closing" ? previousClose : lastestPrice;
+    const { companyName, lastestPrice, previousClose } = stocks[ticker],
+      subjectPrice = style === "Last Closing" ? previousClose : lastestPrice;
 
-      if (quantity > hash[ticker].quantity) return setError("Selling too many");
+    if (quantity > hash[ticker].quantity) return setError("Selling too many");
 
-      transactStock({
-        userId: user.id,
-        ticker,
-        name: companyName,
-        quantity,
-        value: subjectPrice,
-        action: "sell",
-        date: dateCreate()
-      });
-    } else setError("Not a valid ticker");
+    transactStock({
+      userId: user.id,
+      ticker,
+      name: companyName,
+      quantity,
+      value: subjectPrice,
+      action: "sell",
+      date: dateCreate()
+    });
 
     this.setState({ ticker: "--", quantity: "" });
   };
@@ -128,6 +125,7 @@ const mapState = state => {
   return {
     user: state.user,
     portfolio: state.portfolio,
+    stocks: state.stocks,
     style: state.style
   };
 };

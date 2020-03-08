@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { stockPull, dateCreate } from "../utils/utilities";
+import { dateCreate, stockMasterPull } from "../utils/utilities";
 import { transactStock, setError } from "../store";
 
 class BuyForm extends Component {
@@ -40,8 +40,7 @@ class BuyForm extends Component {
     if (!ticker || !quantity)
       return setError("Please fill out the whole form!");
 
-    const res = { companyName: "Test", previousClose: 125, lastestPrice: 100 };
-    // const res = await stockPull(this.state.ticker); // HIT ACTUAL API
+    const res = await stockMasterPull(this.state.ticker);
     if (res) {
       const { companyName, lastestPrice, previousClose } = res,
         subjectPrice = style === "Last Closing" ? previousClose : lastestPrice,
