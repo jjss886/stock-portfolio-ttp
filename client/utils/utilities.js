@@ -4,7 +4,7 @@ if (process.env.NODE_ENV !== "production") require("../../secrets");
 export const refreshTime = 5000; // HOW OFTEN PREMIUM UPDATES
 export const updateCap = 10; // HOW MANY API HITS BEFORE TESTING AFK
 const apiHitMaster = true; // HIT API OR USE TEST FNC INSTEAD
-const logStockPulls = false; // LOG THE STOCK OUTPUTS
+const logStockPulls = true; // LOG THE STOCK OUTPUTS
 const sandBoxHit = true; // HIT SANDBOX OR CORE API
 
 export const dateCreate = () => {
