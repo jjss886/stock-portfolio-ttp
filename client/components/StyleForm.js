@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { setStyle } from "../store";
+import { setStyle, setError } from "../store";
+import { dateCreate } from "../utils/utilities";
 
 class StyleForm extends Component {
   constructor() {
     super();
     this.state = {
-      style: "Last Closing"
+      style: "Regular"
     };
   }
 
@@ -16,11 +17,21 @@ class StyleForm extends Component {
 
   handleSubmit = evt => {
     evt.preventDefault();
-    const { style, setStyle, update } = this.props;
+    const { style, setStyle, update, setError } = this.props,
+      date = dateCreate(),
+      day = date.slice(0, 3),
+      time = Number(date.slice(16, 18)) * 60 + Number(date.slice(19, 21));
+
+    // STILL ACTIVE SO RESET STALL TIMER FOR PARENT COMPONENT
+    update();
 
     if (style !== this.state.style) {
-      setStyle(this.state.style);
-      update();
+      if (
+        this.state.style === "Premium" &&
+        (day === "Sat" || day === "Sun" || time < 570 || time > 960)
+      ) {
+        return setError("Can't use Premium outside market hours");
+      } else setStyle(this.state.style);
     }
   };
 
@@ -78,7 +89,10 @@ const mapState = state => {
 };
 
 const mapDispatch = dispatch => {
-  return { setStyle: style => dispatch(setStyle(style)) };
+  return {
+    setStyle: style => dispatch(setStyle(style)),
+    setError: msg => dispatch(setError(msg))
+  };
 };
 
 export default connect(mapState, mapDispatch)(StyleForm);
