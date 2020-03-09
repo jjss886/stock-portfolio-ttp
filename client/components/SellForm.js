@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { hashStock, dateCreate } from "../utils/utilities";
+import { hashStock, dateCreate, stockMasterPull } from "../utils/utilities";
 import { transactStock, setError } from "../store";
 
 class SellForm extends Component {
@@ -34,7 +34,7 @@ class SellForm extends Component {
     });
   };
 
-  sell = evt => {
+  sell = async evt => {
     evt.preventDefault();
     const { ticker, quantity } = this.state,
       {
@@ -47,6 +47,7 @@ class SellForm extends Component {
         updateTimer
       } = this.props,
       hash = hashStock(portfolio);
+    let latestPrice;
 
     // STILL ACTIVE SO RESET STALL TIMER FOR PARENT COMPONENT
     if (style === "Premium") updateTimer();
@@ -54,14 +55,18 @@ class SellForm extends Component {
     if (ticker === "--" || !quantity)
       return setError("Please fill out the whole form!");
 
-    const { companyName, latestPrice } = stocks[ticker];
-
     if (quantity > hash[ticker].quantity) return setError("Selling too many");
+
+    if (style === "Premium") latestPrice = stocks[ticker].latestPrice;
+    else {
+      const res = await stockMasterPull(this.state.ticker);
+      latestPrice = res.latestPrice;
+    }
 
     transactStock({
       userId: user.id,
       ticker,
-      name: companyName,
+      name: stocks[ticker].companyName,
       quantity,
       value: latestPrice,
       action: "sell",
