@@ -1,10 +1,12 @@
 import axios from "axios";
 if (process.env.NODE_ENV !== "production") require("../../secrets");
 
+// GLOBAL TOGGLES AND TRIGGERS TO MANAGE API CALLS
 export const refreshTime = 3000;
 export const updateCap = 10;
-const apiHitMaster = false;
+const apiHitMaster = true;
 const logStockPulls = true;
+const sandBoxHit = false;
 
 export const dateCreate = () => {
   const date = new Date().toLocaleString("en-US", {
@@ -14,19 +16,33 @@ export const dateCreate = () => {
 };
 
 export const stockMasterPull = async ticker => {
-  if (apiHitMaster) return await stockPullAPI(sticker);
+  if (apiHitMaster) return await stockPullAPI(ticker);
   else return stockPullTest(ticker);
 };
 
 // API STOCK PULL FUNCTION
 export const stockPullAPI = async ticker => {
   try {
-    // PULL ACTUAL STOCK PRICE INFORMATION
-    const { data: stockData } = await axios.get(
-      `https://cloud.iexapis.com/stable/stock/${ticker}/quote?token=${process.env.iexAPIToken}`
-    );
+    let stockData;
 
-    if (logStockPulls) console.log("API STOCK HIT ! -", stockData, new Date());
+    // PULL ACTUAL STOCK PRICE INFORMATION
+    if (sandBoxHit) {
+      // SANDBOX API TOKEN FUNCTIONALITY
+      const { data } = await axios.get(
+        `https://sandbox.iexapis.com/stable/stock/market/batch?symbols=${ticker}&types=quote&filter=companyName,iexRealtimePrice,previousClose,latestPrice,change&token=${process.env.sandIEXAPIToken}`
+      );
+      stockData = data[ticker].quote;
+    } else {
+      // ACTUAL CORE API TOKEN FUNCTIONALITY
+      const { data } = await axios.get(
+        `https://cloud.iexapis.com/stable/stock/market/batch?symbols=${ticker}&types=quote&filter=companyName,iexRealtimePrice,previousClose,latestPrice,change&token=${process.env.trueIEXAPIToken}`
+      );
+      stockData = data[ticker].quote;
+    }
+
+    // CALCULATING AND LAYERING ON THE OPENING PRICE
+    stockData.openingPrice = stockData.latestPrice - stockData.change;
+    if (logStockPulls) console.log("API STOCK ! -", stockData, new Date());
     return stockData;
   } catch (error) {
     console.error("Stock Error -", error);
@@ -46,7 +62,7 @@ export const stockPullTest = ticker => {
       previousClose: Math.floor(Math.random() * 75) + 5
     };
 
-    if (logStockPulls) console.log("TEST STOCK HIT ! -", stockData, new Date());
+    if (logStockPulls) console.log("TEST STOCK ! -", stockData, new Date());
     return stockData;
   } catch (error) {
     console.error("Stock Error -", error);

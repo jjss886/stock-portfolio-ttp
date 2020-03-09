@@ -49,7 +49,7 @@ class SellForm extends Component {
       hash = hashStock(portfolio);
 
     // STILL ACTIVE SO RESET STALL TIMER FOR PARENT COMPONENT
-    // if (style === "Last Price") updateTimer();
+    if (style === "Last Price") updateTimer();
 
     if (ticker === "--" || !quantity)
       return setError("Please fill out the whole form!");
