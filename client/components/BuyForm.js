@@ -13,11 +13,11 @@ class BuyForm extends Component {
   }
 
   handleChange = evt => {
-    const { setError, updateTimer } = this.props;
+    const { setError, updateTimer, style } = this.props;
     let { name, value } = evt.target;
 
     // STILL ACTIVE SO RESET STALL TIMER FOR PARENT COMPONENT
-    updateTimer();
+    if (style === "Last Price") updateTimer();
 
     if (name === "quantity") {
       if (isNaN(value)) return setError("Only include numbers");
@@ -35,15 +35,15 @@ class BuyForm extends Component {
       { user, transactStock, setError, updateTimer, style } = this.props;
 
     // STILL ACTIVE SO RESET STALL TIMER FOR PARENT COMPONENT
-    updateTimer();
+    // if (style === "Last Price") updateTimer();
 
     if (!ticker || !quantity)
       return setError("Please fill out the whole form!");
 
     const res = await stockMasterPull(this.state.ticker);
     if (res) {
-      const { companyName, lastestPrice, previousClose } = res,
-        subjectPrice = style === "Last Closing" ? previousClose : lastestPrice,
+      const { companyName, latestPrice, previousClose } = res,
+        subjectPrice = style === "Last Closing" ? previousClose : latestPrice,
         totalCost = subjectPrice * quantity;
 
       if (totalCost > user.cash) return setError("Not enough cash");

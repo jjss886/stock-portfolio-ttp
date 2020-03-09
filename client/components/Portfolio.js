@@ -54,7 +54,8 @@ class Portfolio extends Component {
     ) {
       this.setState({ update: 1 });
       getLiveStock(hashStock(portfolio));
-      if (style === "Last Price") this.stockTimer();
+      if (style === "Last Price" && prevProps.style !== "Last Price")
+        this.stockTimer();
     }
   }
 
@@ -76,7 +77,7 @@ class Portfolio extends Component {
     }
   };
 
-  updateTimerToZero = () => {
+  updateTimerToOne = () => {
     this.setState({ update: 1 });
   };
 
@@ -158,9 +159,9 @@ class Portfolio extends Component {
           </h4>
 
           <div className="portFormFullDiv">
-            <BuyForm updateTimer={this.updateTimerToZero} />
+            <BuyForm updateTimer={this.updateTimerToOne} />
 
-            <SellForm updateTimer={this.updateTimerToZero} />
+            <SellForm updateTimer={this.updateTimerToOne} />
           </div>
         </div>
       </div>

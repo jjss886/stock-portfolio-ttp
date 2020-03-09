@@ -86,7 +86,7 @@ export const getPortfolio = userId => async dispatch => {
 
 export const transactStock = stockObj => async dispatch => {
   try {
-    const { data: user } = await axios.post(`/api/`, stockObj);
+    const { data: user } = await axios.post(`/api`, stockObj);
     dispatch(addPortfolio(stockObj, user));
   } catch (error) {
     console.error("Redux Error -", error);

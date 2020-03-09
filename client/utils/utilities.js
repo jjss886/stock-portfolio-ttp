@@ -3,7 +3,8 @@ if (process.env.NODE_ENV !== "production") require("../../secrets");
 
 export const refreshTime = 3000;
 export const updateCap = 10;
-export const apiHitMaster = false;
+const apiHitMaster = false;
+const logStockPulls = true;
 
 export const dateCreate = () => {
   const date = new Date().toLocaleString("en-US", {
@@ -25,7 +26,7 @@ export const stockPullAPI = async ticker => {
       `https://cloud.iexapis.com/stable/stock/${ticker}/quote?token=${process.env.iexAPIToken}`
     );
 
-    console.log("API STOCK HIT ! -", stockData, new Date());
+    if (logStockPulls) console.log("API STOCK HIT ! -", stockData, new Date());
     return stockData;
   } catch (error) {
     console.error("Stock Error -", error);
@@ -39,13 +40,13 @@ export const stockPullTest = ticker => {
     // CREATE DUMMY STOCK PRICE INFORMATION
     const stockData = {
       ticker,
-      companyName: "Test",
+      companyName: `${ticker} Test`,
       latestPrice: Math.floor(Math.random() * 75) + 5,
       openingPrice: Math.floor(Math.random() * 75) + 5,
       previousClose: Math.floor(Math.random() * 75) + 5
     };
 
-    console.log("TEST STOCK HIT ! -", stockData, new Date());
+    if (logStockPulls) console.log("TEST STOCK HIT ! -", stockData, new Date());
     return stockData;
   } catch (error) {
     console.error("Stock Error -", error);
