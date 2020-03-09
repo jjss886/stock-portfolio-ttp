@@ -1,5 +1,5 @@
 import axios from "axios";
-if (process.env.NODE_ENV !== "production") require("../../secrets");
+require("../../secrets");
 
 export const refreshTime = 5000; // HOW OFTEN PREMIUM UPDATES
 export const updateCap = 10; // HOW MANY API HITS BEFORE TESTING AFK
