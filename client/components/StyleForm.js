@@ -40,7 +40,7 @@ class StyleForm extends Component {
           </span>
 
           <span className="styleFormSpan2">
-            2. <u className="styleTextPrice">Last Price</u>: Update every 3
+            2. <u className="styleTextPrice">Last Price</u>: Update every 5
             seconds, leveraging the stock's latest price
           </span>
 

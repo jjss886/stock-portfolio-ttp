@@ -4,7 +4,7 @@ if (process.env.NODE_ENV !== "production") require("../../secrets");
 export const refreshTime = 3000;
 export const updateCap = 10;
 const apiHitMaster = false;
-const logStockPulls = false;
+const logStockPulls = true;
 
 export const dateCreate = () => {
   const date = new Date().toLocaleString("en-US", {

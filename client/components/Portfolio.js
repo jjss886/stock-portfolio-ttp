@@ -54,7 +54,10 @@ class Portfolio extends Component {
     ) {
       this.setState({ update: 1 });
       getLiveStock(hashStock(portfolio));
-      if (style === "Last Price" && prevProps.style !== "Last Price")
+      if (
+        style === "Last Price" &&
+        (error !== prevProps.error || prevProps.style !== "Last Price")
+      )
         this.stockTimer();
     }
   }
