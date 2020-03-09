@@ -101,7 +101,6 @@ class Portfolio extends Component {
           stocks[key] = {};
           stocks[key].latestPrice = 0;
           stocks[key].openingPrice = 0;
-          stocks[key].previousClose = 0;
         }
 
         hash[key].curPrice = stocks[key].latestPrice;

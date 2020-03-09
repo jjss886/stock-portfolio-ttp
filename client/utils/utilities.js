@@ -3,7 +3,7 @@ if (process.env.NODE_ENV !== "production") require("../../secrets");
 
 export const refreshTime = 5000; // HOW OFTEN PREMIUM UPDATES
 export const updateCap = 10; // HOW MANY API HITS BEFORE TESTING AFK
-const apiHitMaster = false; // HIT API OR USE TEST FNC INSTEAD
+const apiHitMaster = true; // HIT API OR USE TEST FNC INSTEAD
 const logStockPulls = true; // LOG THE STOCK OUTPUTS
 const sandBoxHit = false; // HIT SANDBOX OR CORE API
 
@@ -40,7 +40,7 @@ export const stockPullAPI = async ticker => {
     }
 
     // CALCULATING AND LAYERING ON THE OPENING PRICE
-    stockData.openingPrice = stockData.latestPrice - stockData.change;
+    stockData.openingPrice = stockData.previousClose;
     if (logStockPulls) console.log("API STOCK -", stockData, Date());
     return stockData;
   } catch (error) {
