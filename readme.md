@@ -1,6 +1,6 @@
 # Stock Portfolio Application
 
-Come become a billionaire with the assistance of this Stock Portfolio Application! In this stock application, users have two options on how their portfolio is updated. The first one (Last Closing) is based on the last closing price and is updated once a day, while the second one (Last Price) is based on the latest price of the stock and is updated every 5 seconds.
+Come become a billionaire with the assistance of this Stock Portfolio Application! In this stock application, users have two options on how their portfolio is updated, based on their usage. They can choose between "Regular", where price is updated once per session, and "Premium", where price is updated every 5 seconds. Both options leverage the latest price that is provided from IEX Cloud.
 
 **Tech Stack**: React, Redux, Node.js, Express, PostgreSQL
 

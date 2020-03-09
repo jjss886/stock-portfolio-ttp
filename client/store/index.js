@@ -13,7 +13,7 @@ const initialState = {
   portfolio: [],
   error: false,
   errorMsg: "",
-  style: "Last Closing"
+  style: "Regular"
 };
 
 // -------------- ACTION TYPES --------------

@@ -17,7 +17,7 @@ class BuyForm extends Component {
     let { name, value } = evt.target;
 
     // STILL ACTIVE SO RESET STALL TIMER FOR PARENT COMPONENT
-    if (style === "Last Price") updateTimer();
+    if (style === "Premium") updateTimer();
 
     if (name === "quantity") {
       if (isNaN(value)) return setError("Only include numbers");
@@ -35,16 +35,15 @@ class BuyForm extends Component {
       { user, transactStock, setError, updateTimer, style } = this.props;
 
     // STILL ACTIVE SO RESET STALL TIMER FOR PARENT COMPONENT
-    if (style === "Last Price") updateTimer();
+    if (style === "Premium") updateTimer();
 
     if (!ticker || !quantity)
       return setError("Please fill out the whole form!");
 
     const res = await stockMasterPull(this.state.ticker);
     if (res) {
-      const { companyName, latestPrice, previousClose } = res,
-        subjectPrice = style === "Last Closing" ? previousClose : latestPrice,
-        totalCost = subjectPrice * quantity;
+      const { companyName, latestPrice } = res,
+        totalCost = latestPrice * quantity;
 
       if (totalCost > user.cash) return setError("Not enough cash");
 
@@ -53,7 +52,7 @@ class BuyForm extends Component {
         ticker,
         name: companyName,
         quantity,
-        value: subjectPrice,
+        value: latestPrice,
         action: "buy",
         date: dateCreate()
       });

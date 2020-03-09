@@ -1,12 +1,11 @@
 import axios from "axios";
 if (process.env.NODE_ENV !== "production") require("../../secrets");
 
-// GLOBAL TOGGLES AND TRIGGERS TO MANAGE API CALLS
-export const refreshTime = 3000;
-export const updateCap = 10;
-const apiHitMaster = true;
-const logStockPulls = true;
-const sandBoxHit = false;
+export const refreshTime = 3000; // HOW OFTEN PREMIUM UPDATES
+export const updateCap = 10; // HOW MANY API HITS BEFORE TESTING AFK
+const apiHitMaster = false; // HIT API OR USE TEST FNC INSTEAD
+const logStockPulls = true; // LOG THE STOCK OUTPUTS
+const sandBoxHit = false; // HIT SANDBOX OR CORE API
 
 export const dateCreate = () => {
   const date = new Date().toLocaleString("en-US", {

@@ -35,13 +35,12 @@ class StyleForm extends Component {
           <span className="styleFormSpan1">Choose From Two Options</span>
 
           <span className="styleFormSpan2">
-            1. <u className="styleTextClosing">Last Closing</u>: Update once a
-            day, leveraging the stock's last closing price
+            1. <u className="styleTextClosing">Regular</u>: Update once per
+            session
           </span>
 
           <span className="styleFormSpan2">
-            2. <u className="styleTextPrice">Last Price</u>: Update every 5
-            seconds, leveraging the stock's latest price
+            2. <u className="styleTextPrice">Premium</u>: Update every 5 seconds
           </span>
 
           <span className="styleFormSpan3">
@@ -57,8 +56,8 @@ class StyleForm extends Component {
               value={this.state.style}
               onChange={this.handleChange}
             >
-              <option className="styleFormOpt">Last Closing</option>
-              <option className="styleFormOpt">Last Price</option>
+              <option className="styleFormOpt">Regular</option>
+              <option className="styleFormOpt">Premium</option>
             </select>
 
             <button

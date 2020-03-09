@@ -15,7 +15,7 @@ class SellForm extends Component {
   handleTickerChange = evt => {
     const { style, updateTimer } = this.props;
     // STILL ACTIVE SO RESET STALL TIMER FOR PARENT COMPONENT
-    if (style === "Last Price") updateTimer();
+    if (style === "Premium") updateTimer();
 
     this.setState({ ticker: evt.target.value });
   };
@@ -25,7 +25,7 @@ class SellForm extends Component {
       { setError, updateTimer, style } = this.props;
 
     // STILL ACTIVE SO RESET STALL TIMER FOR PARENT COMPONENT
-    if (style === "Last Price") updateTimer();
+    if (style === "Premium") updateTimer();
 
     if (isNaN(value)) return setError("Only include numbers");
 
@@ -49,13 +49,12 @@ class SellForm extends Component {
       hash = hashStock(portfolio);
 
     // STILL ACTIVE SO RESET STALL TIMER FOR PARENT COMPONENT
-    if (style === "Last Price") updateTimer();
+    if (style === "Premium") updateTimer();
 
     if (ticker === "--" || !quantity)
       return setError("Please fill out the whole form!");
 
-    const { companyName, latestPrice, previousClose } = stocks[ticker],
-      subjectPrice = style === "Last Closing" ? previousClose : latestPrice;
+    const { companyName, latestPrice } = stocks[ticker];
 
     if (quantity > hash[ticker].quantity) return setError("Selling too many");
 
@@ -64,7 +63,7 @@ class SellForm extends Component {
       ticker,
       name: companyName,
       quantity,
-      value: subjectPrice,
+      value: latestPrice,
       action: "sell",
       date: dateCreate()
     });

@@ -26,7 +26,7 @@ class Portfolio extends Component {
     if (portfolio.length) {
       this.setState({ update: 1 });
       getLiveStock(hashStock(portfolio));
-      if (style === "Last Price") this.stockTimer();
+      if (style === "Premium") this.stockTimer();
     }
   }
 
@@ -55,8 +55,8 @@ class Portfolio extends Component {
       this.setState({ update: 1 });
       getLiveStock(hashStock(portfolio));
       if (
-        style === "Last Price" &&
-        (error !== prevProps.error || prevProps.style !== "Last Price")
+        style === "Premium" &&
+        (error !== prevProps.error || prevProps.style !== "Premium")
       )
         this.stockTimer();
     }
@@ -104,10 +104,7 @@ class Portfolio extends Component {
           stocks[key].previousClose = 0;
         }
 
-        hash[key].curPrice =
-          style === "Last Price"
-            ? stocks[key].latestPrice
-            : stocks[key].previousClose;
+        hash[key].curPrice = stocks[key].latestPrice;
         hash[key].openPrice = stocks[key].openingPrice;
 
         // ACCUMULATING TOTAL PORTFOLIO VALUE
