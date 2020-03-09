@@ -35,19 +35,18 @@ class StyleForm extends Component {
           <span className="styleFormSpan1">Choose From Two Options</span>
 
           <span className="styleFormSpan2">
-            1. <u className="styleTextClosing">Regular</u>: Update once per
+            1. <u className="styleTextRegular">Regular</u>: Update once per
             session
           </span>
 
           <span className="styleFormSpan2">
-            2. <u className="styleTextPrice">Premium</u>: Update every 5 seconds
+            2. <u className="styleTextPremium">Premium</u>: Update every 5
+            seconds
           </span>
 
           <span className="styleFormSpan3">
             Current Style:{" "}
-            <strong className={`styleText${style.split(" ")[1]}`}>
-              {style}
-            </strong>
+            <strong className={`styleText${style}`}>{style}</strong>
           </span>
 
           <div className="styleFormActionsDiv">

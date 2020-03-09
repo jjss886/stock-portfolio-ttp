@@ -91,7 +91,7 @@ class Portfolio extends Component {
 
   postList = port => {
     const hash = hashStock(port),
-      { stocks, style } = this.props;
+      { stocks } = this.props;
     let totalVal = 0;
 
     if (Object.keys(stocks).length) {

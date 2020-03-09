@@ -581,20 +581,21 @@ h4 {
 }
 
 .styleFormSpan3 {
-  margin: 20px 0;
-  font-size: 19px;
+  margin: 25px 0;
+  font-size: 20px;
   font-weight: bold;
 }
 
-.styleTextClosing {
+.styleTextRegular {
   color: rgb(151, 92, 32);
 }
 
-.styleTextPrice {
+.styleTextPremium {
   color: rgb(9, 100, 143);
 }
 
 .styleFormActionsDiv {
+  margin-top: 10px;
   display: flex;
   justify-content: space-between;
   width: 100%;
