@@ -30,7 +30,7 @@ class StyleForm extends Component {
         this.state.style === "Premium" &&
         (day === "Sat" || day === "Sun" || time < 570 || time > 960)
       ) {
-        return setError("Can't use Premium outside market hours");
+        return setError("Premium unavailable outside market hours");
       } else setStyle(this.state.style);
     }
   };
