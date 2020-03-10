@@ -88,10 +88,12 @@ class Portfolio extends Component {
   };
 
   updateTimerToOne = () => {
+    // FUNCTION FOR OTHER COMPONENTS TO RESET IDLE STATE
     this.setState({ update: 1 });
   };
 
   clearStockInterval = () => {
+    // ENSURE API HITS DON'T HIT WHILE ON OTHER COMPONENTS
     this.setState({ update: 0 });
     clearInterval(this.stockInterval);
   };
