@@ -4,6 +4,7 @@ module.exports = router;
 
 router.get("/:userId", async (req, res, next) => {
   try {
+    // RETRIEVE PORTFOLIO FOR SPECIFIC USER
     const userPortfolio = await Stock.findAll({
       where: {
         userId: req.params.userId

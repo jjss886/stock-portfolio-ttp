@@ -1,5 +1,4 @@
 import { createStore, applyMiddleware } from "redux";
-import { createLogger } from "redux-logger";
 import thunkMiddleware from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import axios from "axios";
@@ -51,6 +50,7 @@ export const me = () => async dispatch => {
 export const auth = userObj => async dispatch => {
   let res;
   try {
+    // formName HELPS PINPOINT LOGIN VS. SIGNUP
     const { formName } = userObj;
     res = await axios.post(`/auth/${formName}`, userObj);
   } catch (authError) {
@@ -162,10 +162,7 @@ const reducer = (state = initialState, action) => {
 };
 
 // -------------- STORE CREATION --------------
-const middleware = composeWithDevTools(
-  // applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
-  applyMiddleware(thunkMiddleware)
-);
+const middleware = composeWithDevTools(applyMiddleware(thunkMiddleware));
 
 const store = createStore(reducer, middleware);
 
