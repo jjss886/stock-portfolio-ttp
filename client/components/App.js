@@ -4,8 +4,8 @@ import { withRouter } from "react-router-dom";
 import { me } from "../store";
 
 import Routes from "./Routes";
-import NavBar from "./NavBar";
-import ErrorMsg from "./ErrorMsg";
+import NavBar from "./Global/NavBar";
+import ErrorMsg from "./Global/ErrorMsg";
 
 class App extends Component {
   componentDidMount() {

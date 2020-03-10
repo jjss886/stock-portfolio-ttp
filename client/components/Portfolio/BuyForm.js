@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { dateCreate, stockMasterPull } from "../utils/utilities";
-import { transactStock, setError } from "../store";
+import { dateCreate, stockMasterPull } from "../../utils/utilities";
+import { transactStock, setError } from "../../store";
 
 class BuyForm extends Component {
   constructor() {
@@ -19,11 +19,13 @@ class BuyForm extends Component {
     // STILL ACTIVE SO RESET STALL TIMER FOR PARENT COMPONENT
     if (style === "Premium") updateTimer();
 
+    // ENSURE QUANTITY INPUTS ARE NUMBERS AND CONVERTED TO NUMBERS
     if (name === "quantity") {
       if (isNaN(value)) return setError("Only include numbers");
       else value = Number(value);
     }
 
+    // SET LOCAL STATE FOR LATER SUBMITS
     this.setState({
       [name]: value
     });
@@ -40,6 +42,7 @@ class BuyForm extends Component {
     if (!ticker || !quantity)
       return setError("Please fill out the whole form!");
 
+    // PULL LATEST STOCK PRICE FOR TARGET BUY TO RETRIEVE TRANSACTION PRICE
     const res = await stockMasterPull(this.state.ticker);
     if (res) {
       const { companyName, latestPrice } = res,

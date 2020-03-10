@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { logout } from "../store";
+import { logout } from "../../store";
 
 class NavBar extends Component {
   loggingOut = () => {
@@ -84,8 +84,7 @@ class NavBar extends Component {
 
 const mapState = state => {
   return {
-    user: state.user,
-    state
+    user: state.user
   };
 };
 

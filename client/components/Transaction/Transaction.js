@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getPortfolio } from "../store";
+import { getPortfolio } from "../../store";
 import TransactSum from "./TransactSum";
 import SingleTransact from "./SingleTransact";
 
@@ -19,6 +19,7 @@ class Transaction extends Component {
     const buy = [],
       sell = [];
 
+    // SPLITTING PORTFOLIO INTO BUY & STOCK HISTORIES
     portfolio.forEach(port => {
       if (port.action === "buy") buy.push(port);
       else sell.push(port);

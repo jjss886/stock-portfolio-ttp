@@ -97,6 +97,7 @@ export const getLiveStock = portfolio => async dispatch => {
   try {
     const portKeys = Object.keys(portfolio);
 
+    // ENABLING ASYNC FUNCTIONS WITHIN LOOP
     async function asyncForEach(arr, cb) {
       for (let i = 0; i < arr.length; i++) {
         await cb(arr[i]);
@@ -106,6 +107,7 @@ export const getLiveStock = portfolio => async dispatch => {
     if (portKeys.length) {
       const stockFullObj = {};
 
+      // CALLING ASYNC FUNCTIONS FOR ALL UNIQUE STOCKS
       const start = async () => {
         await asyncForEach(portKeys, async stock => {
           const stockObj = await stockMasterPull(stock);

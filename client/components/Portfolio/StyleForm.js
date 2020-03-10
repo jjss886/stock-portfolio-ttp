@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { setStyle, setError } from "../store";
-import { dateCreate } from "../utils/utilities";
+import { setStyle, setError } from "../../store";
+import { dateCreate } from "../../utils/utilities";
 
 class StyleForm extends Component {
   constructor() {
@@ -26,12 +26,14 @@ class StyleForm extends Component {
     update();
 
     if (style !== this.state.style) {
+      // NO PREMIUM ACCESS OUTSIDE MARKET TRADING HOURS
       if (
         this.state.style === "Premium" &&
         (day === "Sat" || day === "Sun" || time < 570 || time > 960)
       ) {
         return setError("Premium unavailable outside market hours");
-      } else setStyle(this.state.style);
+      }
+      setStyle(this.state.style);
     }
   };
 

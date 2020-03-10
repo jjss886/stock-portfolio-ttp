@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { hashStock, dateCreate, stockMasterPull } from "../utils/utilities";
-import { transactStock, setError } from "../store";
+import { hashStock, dateCreate, stockMasterPull } from "../../utils/utilities";
+import { transactStock, setError } from "../../store";
 
 class SellForm extends Component {
   constructor() {
@@ -57,8 +57,10 @@ class SellForm extends Component {
 
     if (quantity > hash[ticker].quantity) return setError("Selling too many");
 
+    // LATEST PRICE ALWAYS AVAILABLE DURING PREMIUM STYLE
     if (style === "Premium") latestPrice = stocks[ticker].latestPrice;
     else {
+      // NEED TO HIT API TO PULL LATEST PRICE FOR TRANSACTION
       const res = await stockMasterPull(this.state.ticker);
       latestPrice = res.latestPrice;
     }

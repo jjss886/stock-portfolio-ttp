@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { setError } from "../store";
+import { setError } from "../../store";
 
 class ErrorMsg extends Component {
   render() {

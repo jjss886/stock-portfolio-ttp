@@ -3,10 +3,10 @@ import { connect } from "react-redux";
 import { withRouter, Route, Switch } from "react-router-dom";
 import { me } from "../store";
 
-import { Login, Signup } from "./AuthForm";
-import Portfolio from "./Portfolio";
-import Transaction from "./Transaction";
-import HomePage from "./HomePage";
+import { Login, Signup } from "./Global/AuthForm";
+import Portfolio from "./Portfolio/Portfolio";
+import Transaction from "./Transaction/Transaction";
+import HomePage from "./Global/HomePage";
 
 class Routes extends Component {
   componentDidMount() {

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { hashStock, refreshTime, updateCap } from "../utils/utilities";
-import { getPortfolio, getLiveStock, setError } from "../store";
+import { hashStock, refreshTime, updateCap } from "../../utils/utilities";
+import { getPortfolio, getLiveStock, setError } from "../../store";
 
 import StyleForm from "./StyleForm";
 import Stock from "./Stock";
@@ -12,7 +12,7 @@ class Portfolio extends Component {
   constructor() {
     super();
     this.state = {
-      update: 0
+      update: 0 // TRIGGER TO STOP PREMIUM UPDATES IF USER IS IDLE
     };
   }
 
@@ -22,8 +22,8 @@ class Portfolio extends Component {
     // SET PORTFOLIO ONTO STATE
     if (user.id) getPortfolio(user.id);
 
-    // SET STOCK VALUES ONTO STATE
     if (portfolio.length) {
+      // SET STOCK VALUES ONTO STATE, BEGIN UPDATE COUNT
       this.setState({ update: 1 });
       getLiveStock(hashStock(portfolio));
       if (style === "Premium") this.stockTimer();
@@ -44,7 +44,10 @@ class Portfolio extends Component {
       style
     } = this.props;
 
+    // CHECK WHEN NEED NEW PORTFOLIO STATE
     if (user.id && user.id !== prevProps.user.id) getPortfolio(user.id);
+
+    // CHECK WHEN NEED NEW STOCK STATE
     if (
       portfolio.length &&
       (!this.state.update ||
@@ -54,15 +57,18 @@ class Portfolio extends Component {
     ) {
       this.setState({ update: 1 });
       getLiveStock(hashStock(portfolio));
+      // CHECK IF A NEW INTERVAL NEEDS TO BE SET FOR PREMIUM STYLE
       if (
         style === "Premium" &&
         (error !== prevProps.error || prevProps.style !== "Premium")
-      )
+      ) {
         this.stockTimer();
+      }
     }
   }
 
   stockTimer = () => {
+    // PREMIUM STYLE ENABLING CONSTANT PRICE UPDATES BASED ON SET REFRESH TIME
     this.stockInterval = setInterval(this.stockUpdate, refreshTime);
   };
 
@@ -71,6 +77,7 @@ class Portfolio extends Component {
       { update } = this.state;
 
     if (update >= updateCap) {
+      // USER HAS BEEN IDLE LONG ENOUGH SO SHOW ALERT AND RESET
       clearInterval(this.stockInterval);
       setError("Are you still here?");
       this.setState({ update: 0 });
@@ -90,19 +97,21 @@ class Portfolio extends Component {
   };
 
   postList = port => {
+    // CREATING UNIQUE STOCK PORTFOLIO AND CALC TOTAL VALUE
     const hash = hashStock(port),
       { stocks } = this.props;
     let totalVal = 0;
 
     if (Object.keys(stocks).length) {
       Object.keys(hash).forEach(key => {
-        // ADDING IN STOCK VALUE AND OPENING!
+        // SAFE GUARD TEST CASE IF STOCKS AREN'T AVAILABLE YET
         if (!(key in stocks)) {
           stocks[key] = {};
           stocks[key].latestPrice = 0;
           stocks[key].openingPrice = 0;
         }
 
+        // ADDING IN STOCK VALUE AND OPENING
         hash[key].curPrice = stocks[key].latestPrice;
         hash[key].openPrice = stocks[key].openingPrice;
 

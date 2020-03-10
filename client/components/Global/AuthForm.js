@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { auth, removeUser } from "../store";
+import { auth, removeUser } from "../../store";
 
 class AuthForm extends Component {
   componentDidMount() {
+    // ABLE TO REFRESH USER ERROR MESSAGE
     this.props.removeUser();
   }
 
@@ -21,6 +22,7 @@ class AuthForm extends Component {
       password: evt.target.password.value
     };
 
+    // SIGN UP FUNCTION NEEDS TO ALSO INCLUDE NAME
     if (evt.target.name === "signup") {
       const name = evt.target.userName.value;
       userObj.name = name;
@@ -109,6 +111,7 @@ const mapDispatch = dispatch => {
   };
 };
 
+// ABLE TO CREATE BOTH LOGIN AND SIGNUP FUNCTION WITH SAME COMPONENT
 export const Login = withRouter(connect(mapLogin, mapDispatch)(AuthForm));
 
 export const Signup = withRouter(connect(mapSignup, mapDispatch)(AuthForm));
