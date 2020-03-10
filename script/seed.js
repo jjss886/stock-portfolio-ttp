@@ -19,7 +19,7 @@ const stockSeed = [
     ticker: "AAPL",
     name: "Apple, Inc.",
     quantity: 10,
-    value: 290,
+    value: 290.23,
     action: "buy",
     date: Date(),
     userId: 1
@@ -28,7 +28,7 @@ const stockSeed = [
     ticker: "TSLA",
     name: "Tesla, Inc.",
     quantity: 5,
-    value: 720,
+    value: 720.14,
     action: "buy",
     date: Date(),
     userId: 1
@@ -37,7 +37,7 @@ const stockSeed = [
     ticker: "AAPL",
     name: "Apple, Inc.",
     quantity: 2,
-    value: 285,
+    value: 285.52,
     action: "buy",
     date: Date(),
     userId: 1
@@ -46,7 +46,7 @@ const stockSeed = [
     ticker: "BX",
     name: "The Blackstone Group, Inc.",
     quantity: 8,
-    value: 55,
+    value: 55.87,
     action: "buy",
     date: Date(),
     userId: 2

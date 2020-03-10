@@ -22,7 +22,7 @@ const SingleTransact = ({ stock }) => {
         </span>
 
         <span className="singleTransSpan">
-          {text}: <span className="singTransBold">${Math.round(value)}</span>
+          {text}: <span className="singTransBold">${value}</span>
         </span>
 
         <span className="singleTransSpan">

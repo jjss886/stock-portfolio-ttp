@@ -30,11 +30,11 @@ const Stock = ({ stock }) => {
 
       <div className="stockSpanDiv">
         <span className="stockSpan stockSpanOne">
-          Current Price: <strong>${Math.round(curPrice)}</strong>
+          Current Price: <strong>${curPrice}</strong>
         </span>
 
         <span className="stockSpan">
-          Open Price: <strong>${Math.round(openPrice)}</strong>
+          Open Price: <strong>${openPrice}</strong>
         </span>
       </div>
     </div>

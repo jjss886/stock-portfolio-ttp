@@ -3,7 +3,7 @@ require("../../secrets");
 
 export const refreshTime = 5000; // HOW OFTEN PREMIUM UPDATES
 export const updateCap = 10; // HOW MANY API HITS BEFORE TESTING AFK
-const apiHitMaster = true; // HIT API OR USE TEST FNC INSTEAD
+const apiHitMaster = false; // HIT API OR USE TEST FNC INSTEAD
 const logStockPulls = false; // LOG THE STOCK OUTPUTS
 const sandBoxHit = false; // HIT SANDBOX OR CORE API
 
@@ -56,9 +56,9 @@ export const stockPullTest = ticker => {
     const stockData = {
       ticker,
       companyName: `${ticker} Test`,
-      latestPrice: Math.floor(Math.random() * 75) + 5,
-      openingPrice: Math.floor(Math.random() * 75) + 5,
-      previousClose: Math.floor(Math.random() * 75) + 5
+      latestPrice: Math.floor((Math.random() * 75 + 5) * 100) / 100,
+      openingPrice: Math.floor((Math.random() * 75 + 5) * 100) / 100,
+      previousClose: Math.floor((Math.random() * 75 + 5) * 100) / 100
     };
 
     if (logStockPulls) console.log("TEST STOCK -", stockData, Date());
