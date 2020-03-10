@@ -22,7 +22,8 @@ const SingleTransact = ({ stock }) => {
         </span>
 
         <span className="singleTransSpan">
-          {text}: <span className="singTransBold">${value}</span>
+          {text}:{" "}
+          <span className="singTransBold">${value ? value.toFixed(2) : 0}</span>
         </span>
 
         <span className="singleTransSpan">
